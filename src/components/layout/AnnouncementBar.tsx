@@ -1,0 +1,52 @@
+'use client'
+
+import { useState } from 'react'
+import { X } from 'lucide-react'
+
+interface AnnouncementBarProps {
+  message: string
+}
+
+export function AnnouncementBar({ message }: AnnouncementBarProps) {
+  const [visible, setVisible] = useState(true)
+
+  if (!visible) return null
+
+  return (
+    <div
+      style={{
+        background: '#2E1D1B',
+        color: '#D7B2A5',
+        fontFamily: 'var(--font-ui)',
+        fontSize: '10px',
+        letterSpacing: '0.14em',
+        textTransform: 'uppercase',
+        padding: '8px 16px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+      }}
+    >
+      <span>{message}</span>
+      <button
+        onClick={() => setVisible(false)}
+        aria-label="Dismiss announcement"
+        style={{
+          position: 'absolute',
+          right: '16px',
+          background: 'none',
+          border: 'none',
+          color: '#D7B2A5',
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          padding: '4px',
+          transition: 'opacity 200ms',
+        }}
+      >
+        <X size={12} />
+      </button>
+    </div>
+  )
+}
