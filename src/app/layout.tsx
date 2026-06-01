@@ -1,9 +1,32 @@
 import type { Metadata } from 'next'
+import { Cormorant_Garamond, Montserrat, Inter } from 'next/font/google'
 import '@/styles/globals.css'
 import { AnnouncementBar } from '@/components/layout/AnnouncementBar'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { Toaster } from 'react-hot-toast'
+
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['300', '400', '500'],
+  style: ['normal', 'italic'],
+  variable: '--font-display',
+  display: 'swap',
+})
+
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-ui',
+  display: 'swap',
+})
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-body',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: {
@@ -20,11 +43,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${cormorant.variable} ${montserrat.variable} ${inter.variable}`}
+    >
       <head>
         <meta name="color-scheme" content="light dark" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <script dangerouslySetInnerHTML={{ __html: `
+          (function(){var t=localStorage.getItem('naronai-theme');if(t)document.documentElement.setAttribute('data-theme',t)})()
+        `}} />
       </head>
       <body>
         <AnnouncementBar message="Free nationwide delivery over ₦150,000 · Book your private consultation" />

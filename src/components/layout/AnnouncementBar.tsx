@@ -15,22 +15,30 @@ export function AnnouncementBar({ message }: AnnouncementBarProps) {
   return (
     <div
       style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 60,
         background: '#2E1D1B',
         color: '#D7B2A5',
         fontFamily: 'var(--font-ui)',
         fontSize: '10px',
         letterSpacing: '0.14em',
         textTransform: 'uppercase',
-        padding: '8px 16px',
+        padding: '8px 40px 8px 16px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        position: 'relative',
+        overflow: 'hidden',
       }}
     >
-      <span>{message}</span>
+      <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{message}</span>
       <button
-        onClick={() => setVisible(false)}
+        onClick={() => {
+          setVisible(false)
+          window.dispatchEvent(new Event('announcement-dismissed'))
+        }}
         aria-label="Dismiss announcement"
         style={{
           position: 'absolute',
