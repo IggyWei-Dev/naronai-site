@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Search, User, ShoppingBag, Menu, X, Heart, Home, Store, Sun, Moon } from 'lucide-react'
 import { useCartStore } from '@/lib/store/cartStore'
@@ -22,8 +22,7 @@ const ANNOUNCEMENT_BAR_HEIGHT = 36
 export function Navbar() {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [barOffset,  setBarOffset]  = useState(ANNOUNCEMENT_BAR_HEIGHT)
-  const [hidden,     setHidden]     = useState(false)
-  const lastScrollY = useRef(0)
+  const [atTop,      setAtTop]      = useState(true)
   const cartCount = useCartStore((s) => s.itemCount())
   const { theme, toggle } = useTheme()
 
@@ -39,28 +38,11 @@ export function Navbar() {
     return () => window.removeEventListener('announcement-dismissed', handler)
   }, [])
 
-  /* Hide on scroll down, reveal on scroll up */
+  /* Track whether user is at the top of the page */
   useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY
-      if (y > lastScrollY.current && y > 80) {
-        setHidden(true)
-      } else {
-        setHidden(false)
-      }
-      lastScrollY.current = y
-    }
+    const onScroll = () => setAtTop(window.scrollY <= 80)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
-  /* Reveal when mouse approaches top of screen */
-  useEffect(() => {
-    const onMouseMove = (e: MouseEvent) => {
-      if (e.clientY < 80) setHidden(false)
-    }
-    window.addEventListener('mousemove', onMouseMove)
-    return () => window.removeEventListener('mousemove', onMouseMove)
   }, [])
 
   const navBase: React.CSSProperties = {
@@ -70,7 +52,7 @@ export function Navbar() {
     right: 0,
     zIndex: 50,
     background: 'transparent',
-    transform: hidden ? 'translateY(-110%)' : 'translateY(0)',
+    transform: atTop ? 'translateY(0)' : 'translateY(-110%)',
     transition: 'transform 400ms cubic-bezier(0.16, 1, 0.3, 1)',
   }
 
@@ -280,6 +262,8 @@ export function Navbar() {
           borderTop: '0.5px solid var(--color-accent-gold)',
           display: 'flex', justifyContent: 'space-around', alignItems: 'center',
           padding: 'max(10px, env(safe-area-inset-bottom, 10px)) 0 max(10px, env(safe-area-inset-bottom, 10px))',
+          transform: atTop ? 'translateY(100%)' : 'translateY(0)',
+          transition: 'transform 400ms cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       >
         <BottomTab href="/"        label="Home">    <Home size={20} /></BottomTab>

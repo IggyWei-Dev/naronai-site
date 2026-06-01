@@ -31,7 +31,7 @@ export function HeroSection() {
       aria-label="Hero"
       style={{
         height: '100svh',
-        minHeight: '640px',
+        minHeight: '600px',
         position: 'relative',
         overflow: 'hidden',
         background: '#2E1D1B',
@@ -54,6 +54,7 @@ export function HeroSection() {
             height: '100%',
             objectFit: 'cover',
             objectPosition: '68% 15%',
+            display: 'block',
           }}
         />
         <div style={{
@@ -108,6 +109,7 @@ export function HeroSection() {
 
       {/* ── Left panel ─────────────────────────────────────────────── */}
       <div
+        className="pb-[100px] md:pb-[clamp(80px,10vh,120px)]"
         style={{
           position: 'relative',
           zIndex: 10,
@@ -116,7 +118,6 @@ export function HeroSection() {
           flexDirection: 'column',
           justifyContent: 'center',
           paddingTop: 'clamp(72px, 10vh, 100px)',
-          paddingBottom: 'clamp(80px, 10vh, 120px)',
           paddingLeft: 'clamp(24px, 6vw, 100px)',
           paddingRight: '24px',
         }}
