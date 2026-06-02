@@ -1,67 +1,100 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Award, Sparkles, Crown, Globe } from 'lucide-react'
+import { Sparkles, Crown, Globe, Gem } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
+import BorderGlow from '@/components/ui/BorderGlow'
 
-const FEATURES = [
-  { icon: Award,    title: 'Premium Quality',    desc: 'Luxury human hair only.' },
-  { icon: Sparkles, title: 'Bespoke Experience',  desc: 'Custom. Personal. Perfect.' },
-  { icon: Crown,    title: 'VIP Access',          desc: 'Exclusive perks & events.' },
-  { icon: Globe,    title: 'Worldwide Delivery',  desc: 'Fast. Secure. Insured.' },
+const FEATURES: { icon: LucideIcon; title: string; desc: string }[] = [
+  {
+    icon: Gem,
+    title: 'Premium Quality',
+    desc: 'Every piece uses 100% unprocessed human hair, selected for density, movement, and longevity.',
+  },
+  {
+    icon: Sparkles,
+    title: 'Bespoke Experience',
+    desc: 'Length, density, lace type, and cap construction are set to your specification.',
+  },
+  {
+    icon: Crown,
+    title: 'VIP Access',
+    desc: 'Members receive new drops first, priority bookings with in-house stylists, and private event invitations.',
+  },
+  {
+    icon: Globe,
+    title: 'Worldwide Delivery',
+    desc: 'We ship to over 40 countries with real-time tracking and full insurance on every order.',
+  },
 ]
 
 export function FeatureStrip() {
   return (
     <section
       aria-label="Features"
-      style={{
-        background: 'var(--color-bg)',
-        borderTop: '1px solid var(--color-accent-gold)',
-        borderBottom: '1px solid var(--color-accent-gold)',
-      }}
+      style={{ background: '#2E1D1B', borderTop: '1px solid rgba(195, 160, 91, 0.2)' }}
+      className="py-12 md:py-16"
     >
-      <div className="grid grid-cols-2 md:grid-cols-4 max-w-[1440px] mx-auto">
-        {FEATURES.map((f, i) => {
-          const Icon = f.icon
-          return (
-            <motion.div
-              key={f.title}
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.55, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-              className={[
-                'flex flex-col items-center text-center gap-[7px] p-8 md:p-11',
-                i % 2 === 0 ? 'border-r border-r-[var(--color-border)]' : '',
-                i < 2 ? 'border-b border-b-[var(--color-border)] md:border-b-0' : '',
-                i < 3 ? 'md:border-r md:border-r-[var(--color-border)]' : 'md:border-r-0',
-              ].join(' ')}
-            >
-              {/* Icon inherits color via currentColor so it responds to theme */}
-              <span style={{ color: 'var(--color-accent-gold)' }}>
-                <Icon size={64} strokeWidth={1.0} />
-              </span>
-              <span style={{
-                fontFamily: 'var(--font-ui)',
-                fontSize: '13px',
-                letterSpacing: '0.16em',
-                textTransform: 'uppercase',
-                color: 'var(--color-text)',
-                fontWeight: 500,
-              }}>
-                {f.title}
-              </span>
-              <span style={{
-                fontFamily: 'var(--font-ui)',
-                fontSize: '12px',
-                letterSpacing: '0.05em',
-                color: 'var(--color-text-muted)',
-              }}>
-                {f.desc}
-              </span>
-            </motion.div>
-          )
-        })}
+      <div className="max-w-[1440px] mx-auto px-4 md:px-6 lg:px-0">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+          {FEATURES.map((f, i) => {
+            const Icon = f.icon
+            return (
+              <motion.div
+                key={f.title}
+                className="h-full"
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.55, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <BorderGlow
+                  borderRadius={4}
+                  backgroundColor="#3A1C28"
+                  glowColor="38 45 55"
+                  colors={['#7A2F4B', '#C3A05B', '#E8B8AA']}
+                  glowIntensity={0.85}
+                  edgeSensitivity={22}
+                  glowRadius={24}
+                  coneSpread={20}
+                  fillOpacity={0.3}
+                  className="h-full"
+                >
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      textAlign: 'center',
+                      gap: '10px',
+                      padding: '28px 20px',
+                    }}
+                  >
+                    <Icon
+                      size={80}
+                      strokeWidth={1.0}
+                      style={{ color: i % 2 === 0 ? '#C3A05B' : '#E8B8AA' }}
+                      aria-hidden="true"
+                    />
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-ui)',
+                        fontSize: '10px',
+                        letterSpacing: '0.16em',
+                        textTransform: 'uppercase',
+                        color: '#F4ECE5',
+                        fontWeight: 600,
+                      }}
+                    >
+                      {f.title}
+                    </span>
+                   
+                  </div>
+                </BorderGlow>
+              </motion.div>
+            )
+          })}
+        </div>
       </div>
     </section>
   )
