@@ -201,7 +201,7 @@ function AccordionCard({
           >
             {/* Desktop: vertical writing */}
             <span
-              className="hidden lg:block"
+              className="hidden md:block"
               style={{
                 writingMode: 'vertical-rl',
                 textOrientation: 'mixed',
@@ -218,7 +218,7 @@ function AccordionCard({
             </span>
             {/* Mobile: horizontal */}
             <span
-              className="lg:hidden"
+              className="md:hidden"
               style={{
                 fontFamily: 'var(--font-ui)',
                 fontSize: '13px',
@@ -316,7 +316,7 @@ export function CollectionsGrid() {
 
       {/* ── Right: accordion cards ── */}
       <div
-        className="flex flex-col lg:flex-row overflow-hidden h-[clamp(480px,85vh,640px)] lg:h-[clamp(300px,55vh,700px)]"
+        className="flex flex-col md:flex-row overflow-hidden h-[clamp(480px,85vh,640px)] md:h-[clamp(300px,55vh,700px)]"
         style={{
           gap: '2px',
           alignSelf: 'stretch',

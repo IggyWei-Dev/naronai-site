@@ -41,9 +41,9 @@ export function Navbar() {
     return () => window.removeEventListener('announcement-dismissed', handler)
   }, [])
 
-  /* Track whether user is at the top of the page */
+  /* Track top position for blur */
   useEffect(() => {
-    const onScroll = () => setAtTop(window.scrollY <= 80)
+    const onScroll = () => setAtTop(window.scrollY <= 8)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -54,9 +54,10 @@ export function Navbar() {
     left: 0,
     right: 0,
     zIndex: 50,
-    background: 'transparent',
-    transform: atTop ? 'translateY(0)' : 'translateY(-110%)',
-    transition: 'transform 400ms cubic-bezier(0.16, 1, 0.3, 1)',
+    background: atTop ? 'transparent' : 'rgba(46, 29, 27, 0.35)',
+    backdropFilter: atTop ? 'none' : 'blur(12px)',
+    WebkitBackdropFilter: atTop ? 'none' : 'blur(12px)',
+    transition: 'background 300ms ease, backdrop-filter 300ms ease',
   }
 
   const linkStyle: React.CSSProperties = {

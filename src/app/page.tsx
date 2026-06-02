@@ -3,7 +3,6 @@ import { FeatureStrip }       from '@/components/home/FeatureStrip'
 import { BrandStoryPanel }    from '@/components/home/BrandStoryPanel'
 import { CollectionsGrid }    from '@/components/home/CollectionsGrid'
 import { TestimonialsSection } from '@/components/home/TestimonialsSection'
-import { NewsletterSection }  from '@/components/home/NewsletterSection'
 
 export default function HomePage() {
   return (
@@ -13,7 +12,6 @@ export default function HomePage() {
       <BrandStoryPanel />
       <CollectionsGrid />
       <TestimonialsSection />
-      <NewsletterSection />
     </>
   )
 }

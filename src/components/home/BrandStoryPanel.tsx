@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Signature } from '@/components/ui/signature'
+import './BrandStoryPanel.css'
 
 const PORTRAIT = '/assets/images/brand-story-portrait.png'
 
@@ -13,10 +14,15 @@ export function BrandStoryPanel() {
   return (
     <section
       aria-label="About Naronai"
-      style={{ background: 'var(--color-bg)' }}
+      style={{ background: 'var(--color-bg)', position: 'relative', overflow: 'hidden' }}
       className="py-8 md:py-20"
     >
-      <div className="max-w-[1440px] mx-auto px-8 md:px-16 lg:px-24">
+      <div aria-hidden="true" className="blush-orb-bg">
+        <div className="blush-orb brand-story-orb-a" />
+        <div className="blush-orb brand-story-orb-b" />
+        <div className="blush-orb brand-story-orb-c" />
+      </div>
+      <div className="max-w-[1440px] mx-auto px-8 md:px-16 lg:px-24" style={{ position: 'relative', zIndex: 1 }}>
         <div className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-10 lg:gap-14 items-center">
 
           {/* Text column */}
