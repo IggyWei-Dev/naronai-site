@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useState } from "react";
 import { motion } from "framer-motion";
-import opentype from "opentype.js";
+import { parse as opentypeParse } from "opentype.js";
 import { cn } from "@/lib/utils";
 
 interface SignatureProps {
@@ -14,6 +14,7 @@ interface SignatureProps {
   fontSize?: number;
   duration?: number;
   delay?: number;
+  strokeWidth?: number;
   className?: string;
   inView?: boolean;
   once?: boolean;
@@ -43,6 +44,7 @@ export function Signature({
   fontSize = 32,
   duration = 1.5,
   delay = 0,
+  strokeWidth = 2,
   className,
   inView = false,
   once = true,
@@ -76,7 +78,7 @@ export function Signature({
             const res = await fetch(path);
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
             const buffer = await res.arrayBuffer();
-            font = opentype.parse(buffer);
+            font = opentypeParse(buffer);
             break;
           } catch {
             // Try next path
@@ -206,7 +208,7 @@ export function Signature({
           key={i}
           d={d}
           stroke={paint}
-          strokeWidth={2}
+          strokeWidth={strokeWidth}
           fill="none"
           variants={variants}
           transition={{

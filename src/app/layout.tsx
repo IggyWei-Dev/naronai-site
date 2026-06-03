@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
 import { Cormorant_Garamond, Montserrat, Inter } from 'next/font/google'
 import '@/styles/globals.css'
-import { AnnouncementBar } from '@/components/layout/AnnouncementBar'
-import { Navbar } from '@/components/layout/Navbar'
-import { Footer } from '@/components/layout/Footer'
-import { Toaster } from 'react-hot-toast'
+import { AnnouncementBar }  from '@/components/layout/AnnouncementBar'
+import { Navbar }            from '@/components/layout/Navbar'
+import { Footer }            from '@/components/layout/Footer'
+import { RevealObserver }    from '@/components/layout/RevealObserver'
+import { NavigationLoader }  from '@/components/layout/NavigationLoader'
+import { Toaster }           from 'react-hot-toast'
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -59,6 +61,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Navbar />
         <main>{children}</main>
         <Footer />
+        <RevealObserver />
+        <NavigationLoader />
         <Toaster
           position="bottom-center"
           toastOptions={{

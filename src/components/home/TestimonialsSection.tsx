@@ -1,56 +1,80 @@
 'use client'
 
-import { useRef, useState } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
-import CardSwap, { Card, type CardSwapHandle } from '@/components/ui/CardSwap'
+import { motion } from 'framer-motion'
+import { TestimonialsColumn, type Testimonial } from '@/components/ui/testimonials-columns-1'
 import './TestimonialsSection.css'
 
-const TESTIMONIALS = [
+const TESTIMONIALS: Testimonial[] = [
   {
-    quote:
-      "I wore the Signature lace front to my brother's wedding in Abuja. Every single woman in that room asked me where I got my hair.",
-    name: 'Adaeze O.',
-    location: 'Lagos, Nigeria',
+    text: "I wore the Signature lace front to my brother's wedding in Abuja. Every single woman in that room stopped to ask where I got my hair.",
+    image: "https://randomuser.me/api/portraits/women/44.jpg",
+    name: "Adaeze O.",
+    role: "Lagos, Nigeria",
   },
   {
-    quote:
-      "I have ordered from six different wig brands in two years. Naronai is the first one where the product matched exactly what was described: the density, the lace, the cap construction.",
-    name: 'Chidinma N.',
-    location: 'Port Harcourt, Nigeria',
+    text: "I've ordered from six wig brands in two years. Naronai is the first where the product matched exactly what was described — the density, the lace, the cap construction.",
+    image: "https://randomuser.me/api/portraits/women/68.jpg",
+    name: "Chidinma N.",
+    role: "Port Harcourt, Nigeria",
   },
   {
-    quote:
-      "My consultant walked me through every detail before anything was ordered. The wig arrived exactly as we designed it together. I had never experienced that kind of process before.",
-    name: 'Funmi A.',
-    location: 'Ibadan, Nigeria',
+    text: "My consultant walked me through every detail before anything was ordered. The wig arrived exactly as we designed it together. That kind of care is rare.",
+    image: "https://randomuser.me/api/portraits/women/75.jpg",
+    name: "Funmi A.",
+    role: "Ibadan, Nigeria",
   },
   {
-    quote:
-      "I spent a year looking for something that felt like it was made for me. The cap construction alone made the difference. Four months in, I still reach for it first.",
-    name: 'Ngozi E.',
-    location: 'Enugu, Nigeria',
+    text: "I spent a year looking for something that felt like it was made for me. The cap construction alone made the difference. Four months in, I still reach for it first.",
+    image: "https://randomuser.me/api/portraits/women/90.jpg",
+    name: "Ngozi E.",
+    role: "Enugu, Nigeria",
+  },
+  {
+    text: "I've never felt so confident walking into a room. The install lasted through three events and a flight home. Completely worth every naira.",
+    image: "https://randomuser.me/api/portraits/women/32.jpg",
+    name: "Tolu B.",
+    role: "Abuja, Nigeria",
+  },
+  {
+    text: "The quality is not comparable to anything else I've tried. It moves, it breathes, it looks like my actual hair — just on a very good day.",
+    image: "https://randomuser.me/api/portraits/women/57.jpg",
+    name: "Nnenna K.",
+    role: "Lagos, Nigeria",
+  },
+  {
+    text: "My sister saw mine and ordered hers the same night. Now we're both regulars. Naronai doesn't need advertising — the product speaks for itself.",
+    image: "https://randomuser.me/api/portraits/women/14.jpg",
+    name: "Amaka U.",
+    role: "Onitsha, Nigeria",
+  },
+  {
+    text: "I was nervous ordering online without trying it first. The team answered every question I had. When it arrived, it was better than I imagined.",
+    image: "https://randomuser.me/api/portraits/women/29.jpg",
+    name: "Seun F.",
+    role: "Lekki, Nigeria",
+  },
+  {
+    text: "The texture is unlike anything else. Everyone assumes it's my natural hair. That is the highest compliment I could give any wig brand.",
+    image: "https://randomuser.me/api/portraits/women/82.jpg",
+    name: "Zara M.",
+    role: "Victoria Island, Nigeria",
   },
 ]
 
-function pad(n: number) {
-  return String(n + 1).padStart(2, '0')
-}
+const firstColumn  = TESTIMONIALS.slice(0, 3)
+const secondColumn = TESTIMONIALS.slice(3, 6)
+const thirdColumn  = TESTIMONIALS.slice(6, 9)
 
 export function TestimonialsSection() {
-  const swapRef = useRef<CardSwapHandle>(null)
-  const [currentIndex, setCurrentIndex] = useState(0)
-
-  const handlePrev = () => {
-    swapRef.current?.advance()
-  }
-  const handleNext = () => {
-    swapRef.current?.advance()
-  }
-
   return (
     <section
       aria-label="Client testimonials"
-      style={{ background: '#F7F2EC', overflow: 'hidden', paddingTop: 'clamp(48px, 6vh, 80px)', position: 'relative' }}
+      style={{
+        background: '#F7F2EC',
+        overflow: 'hidden',
+        padding: 'clamp(72px, 10vh, 120px) 0',
+        position: 'relative',
+      }}
     >
       <div aria-hidden="true" className="blush-orb-bg">
         <div className="blush-orb testimonials-orb-a" />
@@ -58,242 +82,68 @@ export function TestimonialsSection() {
         <div className="blush-orb testimonials-orb-c" />
       </div>
 
-      <div
-        className="grid grid-cols-1 lg:grid-cols-[3fr_4fr]"
-        style={{ maxWidth: '1160px', margin: '0 auto', position: 'relative', zIndex: 1 }}
-      >
-        {/* Left: heading + context */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            gap: '20px',
-            padding: 'clamp(64px, 10vh, 120px) clamp(28px, 6vw, 96px)',
-          }}
+      <div style={{ maxWidth: '1160px', margin: '0 auto', padding: '0 clamp(20px, 5vw, 64px)', position: 'relative', zIndex: 1 }}>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true }}
+          style={{ textAlign: 'center', marginBottom: 'clamp(48px, 6vh, 72px)' }}
         >
+          <p
+            style={{
+              fontFamily: 'var(--font-ui)',
+              fontSize: '9px',
+              letterSpacing: '0.22em',
+              textTransform: 'uppercase',
+              color: '#7A2F4B',
+              marginBottom: '16px',
+            }}
+          >
+            Client Stories
+          </p>
+
           <h2
             style={{
               fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(30px, 3.5vw, 52px)',
+              fontSize: 'clamp(28px, 3.2vw, 48px)',
               fontWeight: 300,
               lineHeight: 1.1,
               color: '#2E1D1B',
-              margin: 0,
+              margin: '0 auto',
+              maxWidth: '520px',
               textWrap: 'balance',
             } as React.CSSProperties}
           >
             From Lagos to Enugu,{' '}
-            <em style={{ fontStyle: 'italic', color: '#7A4F3A' }}>
+            <em style={{ fontStyle: 'italic', color: '#7A2F4B' }}>
               the same experience.
             </em>
           </h2>
+        </motion.div>
 
-          {/* City tags */}
-          <div
-            aria-hidden="true"
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '8px',
-              marginTop: '4px',
-            }}
-          >
-            {['Lagos', 'Port Harcourt', 'Ibadan', 'Enugu'].map((city) => (
-              <span
-                key={city}
-                style={{
-                  fontFamily: 'var(--font-ui)',
-                  fontSize: '8px',
-                  letterSpacing: '0.16em',
-                  textTransform: 'uppercase',
-                  color: 'rgba(46,29,27,0.60)',
-                  padding: '5px 10px',
-                  border: '0.5px solid rgba(46,29,27,0.18)',
-                }}
-              >
-                {city}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Right: card stack */}
         <div
+          className="flex justify-center gap-5"
           style={{
-            position: 'relative',
-            minHeight: 'clamp(600px, 72vh, 780px)',
+            maskImage: 'linear-gradient(to bottom, transparent, black 18%, black 82%, transparent)',
+            WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 18%, black 82%, transparent)',
+            maxHeight: '680px',
+            overflow: 'hidden',
           }}
         >
-          <CardSwap
-            ref={swapRef}
-            width={420}
-            height={380}
-            cardDistance={55}
-            verticalDistance={45}
-            delay={7000}
-            pauseOnHover
-            skewAmount={5}
-            easing="elastic"
-            onSwap={setCurrentIndex}
-          >
-            {TESTIMONIALS.map((t) => (
-              <Card key={t.name}>
-                {/* Open-quote mark */}
-                <div
-                  aria-hidden="true"
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    fontSize: '56px',
-                    lineHeight: 1,
-                    color: '#7A2F4B',
-                    fontWeight: 300,
-                    opacity: 0.55,
-                    flexShrink: 0,
-                    marginBottom: '8px',
-                  }}
-                >
-                  &ldquo;
-                </div>
-
-                {/* Quote */}
-                <blockquote
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    fontSize: '15px',
-                    fontStyle: 'italic',
-                    fontWeight: 300,
-                    lineHeight: 1.65,
-                    color: '#2E1D1B',
-                    margin: 0,
-                    flex: 1,
-                  }}
-                >
-                  {t.quote}
-                </blockquote>
-
-                {/* Attribution */}
-                <div
-                  style={{
-                    marginTop: '24px',
-                    paddingTop: '16px',
-                    borderTop: '0.5px solid rgba(46,29,27,0.15)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '3px',
-                    flexShrink: 0,
-                  }}
-                >
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-ui)',
-                      fontSize: '9px',
-                      fontWeight: 600,
-                      letterSpacing: '0.16em',
-                      textTransform: 'uppercase',
-                      color: '#2E1D1B',
-                    }}
-                  >
-                    {t.name}
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-ui)',
-                      fontSize: '8px',
-                      letterSpacing: '0.1em',
-                      color: 'rgba(46,29,27,0.72)',
-                    }}
-                  >
-                    {t.location}
-                  </span>
-                </div>
-              </Card>
-            ))}
-          </CardSwap>
-
-          {/* Navigation overlay */}
-          <div
-            style={{
-              position: 'absolute',
-              bottom: 'clamp(24px, 4vh, 44px)',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '16px',
-              zIndex: 20,
-            }}
-          >
-            <NavButton label="Previous testimonial" onClick={handlePrev}>
-              <ChevronLeft size={13} strokeWidth={1.5} />
-            </NavButton>
-
-            <span
-              aria-live="polite"
-              aria-atomic="true"
-              style={{
-                fontFamily: 'var(--font-ui)',
-                fontSize: '10px',
-                letterSpacing: '0.18em',
-                color: 'rgba(46,29,27,0.40)',
-                minWidth: '48px',
-                textAlign: 'center',
-                userSelect: 'none',
-              }}
-            >
-              {pad(currentIndex)} / {pad(TESTIMONIALS.length - 1)}
-            </span>
-
-            <NavButton label="Next testimonial" onClick={handleNext}>
-              <ChevronRight size={13} strokeWidth={1.5} />
-            </NavButton>
-          </div>
+          <TestimonialsColumn testimonials={firstColumn} duration={18} />
+          <TestimonialsColumn
+            testimonials={secondColumn}
+            duration={22}
+            className="hidden md:block"
+          />
+          <TestimonialsColumn
+            testimonials={thirdColumn}
+            duration={20}
+            className="hidden lg:block"
+          />
         </div>
       </div>
     </section>
-  )
-}
-
-/* ── Nav button ─────────────────────────────────────────────────── */
-
-function NavButton({
-  label,
-  onClick,
-  children,
-}: {
-  label: string
-  onClick: () => void
-  children: React.ReactNode
-}) {
-  return (
-    <button
-      aria-label={label}
-      onClick={onClick}
-      onMouseEnter={(e) => {
-        const el = e.currentTarget as HTMLButtonElement
-        el.style.borderColor = 'rgba(46,29,27,0.45)'
-        el.style.color = '#2E1D1B'
-      }}
-      onMouseLeave={(e) => {
-        const el = e.currentTarget as HTMLButtonElement
-        el.style.borderColor = 'rgba(46,29,27,0.2)'
-        el.style.color = 'rgba(46,29,27,0.5)'
-      }}
-      style={{
-        background: 'none',
-        border: '0.5px solid rgba(46,29,27,0.2)',
-        cursor: 'pointer',
-        color: 'rgba(46,29,27,0.5)',
-        width: '32px',
-        height: '32px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        transition: 'border-color 200ms ease, color 200ms ease',
-        flexShrink: 0,
-      }}
-    >
-      {children}
-    </button>
   )
 }
