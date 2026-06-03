@@ -6,6 +6,7 @@ import { Search, User, ShoppingBag, Sun, Moon } from 'lucide-react'
 import { useCartStore } from '@/lib/store/cartStore'
 import { useTheme } from '@/lib/hooks/useTheme'
 import { StaggeredMenu } from '@/components/ui/StaggeredMenu'
+import { createClient } from '@/lib/supabase/client'
 
 const NAV_LEFT  = [
   { label: 'Shop',         href: '/shop' },
@@ -31,8 +32,20 @@ const ANNOUNCEMENT_BAR_HEIGHT = 36
 export function Navbar() {
   const [barOffset, setBarOffset] = useState(ANNOUNCEMENT_BAR_HEIGHT)
   const [atTop,     setAtTop]     = useState(true)
+  const [isSignedIn, setIsSignedIn] = useState(false)
   const cartCount = useCartStore((s) => s.itemCount())
   const { theme, toggle } = useTheme()
+
+  useEffect(() => {
+    const supabase = createClient()
+    supabase.auth.getSession().then(({ data }) => {
+      setIsSignedIn(!!data.session)
+    })
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setIsSignedIn(!!session)
+    })
+    return () => listener.subscription.unsubscribe()
+  }, [])
 
   /* Listen for announcement bar dismissal */
   useEffect(() => {
@@ -55,9 +68,9 @@ export function Navbar() {
     right: 0,
     zIndex: 50,
     background: atTop ? 'transparent' : 'rgba(46, 29, 27, 0.35)',
-    backdropFilter: atTop ? 'none' : 'blur(12px)',
-    WebkitBackdropFilter: atTop ? 'none' : 'blur(12px)',
-    transition: 'background 300ms ease, backdrop-filter 300ms ease',
+    backdropFilter: 'blur(12px)',
+    WebkitBackdropFilter: 'blur(12px)',
+    transition: 'background 300ms ease',
   }
 
   const linkStyle: React.CSSProperties = {
@@ -139,7 +152,7 @@ export function Navbar() {
           {/* Icon buttons */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '22px', flexShrink: 0 }}>
             <IconButton href="/search"  label="Search"><Search size={16} /></IconButton>
-            <IconButton href="/account" label="Account"><User size={16} /></IconButton>
+            <IconButton href={isSignedIn ? '/account' : '/auth/sign-in'} label="Account"><User size={16} /></IconButton>
             <button onClick={toggle} aria-label="Toggle theme" style={{ color: '#F4ECE5', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', opacity: 0.85, padding: 0 }}>
               {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
             </button>

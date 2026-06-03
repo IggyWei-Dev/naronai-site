@@ -19,6 +19,7 @@ interface SignatureProps {
   inView?: boolean;
   once?: boolean;
   fontUrl?: string;
+  stretch?: boolean;           // scale SVG to fill container width, stroke stays fixed
 }
 
 function sanitizePath(d: string): string {
@@ -49,11 +50,12 @@ export function Signature({
   inView = false,
   once = true,
   fontUrl,
+  stretch = false,
 }: SignatureProps) {
   const [paths, setPaths] = useState<string[]>([]);
   const [width, setWidth] = useState<number>(300);
   const height = fontSize * 3;
-  const horizontalPadding = fontSize * 0.1;
+  const horizontalPadding = fontSize * (stretch ? 0.3 : 0.1);
   const topMargin = fontSize * 1.5;
   const baseline = topMargin;
   const maskId      = `signature-reveal-${useId().replace(/:/g, "")}`;
@@ -131,7 +133,7 @@ export function Signature({
     }
 
     load();
-  }, [text, fontSize, baseline, horizontalPadding, fontUrl]);
+  }, [text, fontSize, baseline, horizontalPadding, stretch, fontUrl]);
 
   const variants = {
     hidden: { pathLength: 0, opacity: 0 },
@@ -141,11 +143,13 @@ export function Signature({
   return (
     <motion.svg
       key={paths.length}
-      width={width}
-      height={height}
+      width={stretch ? "100%" : width}
+      height={stretch ? undefined : height}
       viewBox={`0 0 ${width} ${height}`}
+      preserveAspectRatio={stretch ? "xMinYMid meet" : undefined}
       fill="none"
       className={cn("text-foreground overflow-visible", className)}
+      style={stretch ? { display: 'block', height: 'auto' } : undefined}
       initial="hidden"
       whileInView={inView ? "visible" : undefined}
       animate={inView ? undefined : "visible"}
@@ -195,7 +199,7 @@ export function Signature({
                   duration: 0.01,
                 },
               }}
-              vectorEffect="non-scaling-stroke"
+              vectorEffect={stretch ? undefined : "non-scaling-stroke"}
               strokeLinecap="round"
               strokeLinejoin="round"
             />

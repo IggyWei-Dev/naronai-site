@@ -1,12 +1,7 @@
 import type { Metadata } from 'next'
 import { Cormorant_Garamond, Montserrat, Inter } from 'next/font/google'
 import '@/styles/globals.css'
-import { AnnouncementBar }  from '@/components/layout/AnnouncementBar'
-import { Navbar }            from '@/components/layout/Navbar'
-import { Footer }            from '@/components/layout/Footer'
-import { RevealObserver }    from '@/components/layout/RevealObserver'
-import { NavigationLoader }  from '@/components/layout/NavigationLoader'
-import { Toaster }           from 'react-hot-toast'
+import { NavigationLoader } from '@/components/layout/NavigationLoader'
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -57,25 +52,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         `}} />
       </head>
       <body>
-        <AnnouncementBar message="Free nationwide delivery over ₦150,000 · Book your private consultation" />
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-        <RevealObserver />
+        {children}
         <NavigationLoader />
-        <Toaster
-          position="bottom-center"
-          toastOptions={{
-            style: {
-              background: 'var(--color-bg-card)',
-              color: 'var(--color-text-primary)',
-              border: '0.5px solid var(--color-border-medium)',
-              fontFamily: 'var(--font-ui)',
-              fontSize: '12px',
-              letterSpacing: '0.06em',
-            },
-          }}
-        />
       </body>
     </html>
   )
