@@ -21,10 +21,11 @@ async function getProduct(slug: string): Promise<Product | null> {
 
   return {
     ...data,
-    inStock: data.in_stock,
-    isNew:   data.is_new,
-    hairType: data.hair_type,
-    capType:  data.cap_type,
+    price:     data.price / 100,
+    inStock:   data.in_stock,
+    isNew:     data.is_new,
+    hairType:  data.hair_type,
+    capType:   data.cap_type,
     createdAt: data.created_at,
   } as Product
 }
@@ -44,19 +45,29 @@ export default async function ProductPage({ params }: Props) {
   if (!product) notFound()
 
   return (
-    <div
-      style={{
-        maxWidth: '1440px',
-        margin: '0 auto',
-        padding: '40px 64px 96px',
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
-        gap: '64px',
-        alignItems: 'start',
-      }}
-    >
-      <ProductGallery images={product.images} name={product.name} />
-      <ProductDetails product={product} />
-    </div>
+    <>
+      <style>{`
+        .product-page-grid {
+          max-width: 1440px;
+          margin: 0 auto;
+          padding: 140px 64px 96px;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 64px;
+          align-items: start;
+        }
+        @media (max-width: 768px) {
+          .product-page-grid {
+            grid-template-columns: 1fr;
+            padding: 120px 24px 80px;
+            gap: 32px;
+          }
+        }
+      `}</style>
+      <div className="product-page-grid">
+        <ProductGallery images={product.images} name={product.name} />
+        <ProductDetails product={product} />
+      </div>
+    </>
   )
 }

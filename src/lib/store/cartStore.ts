@@ -3,6 +3,9 @@ import type { CartItem, Product } from '@/types'
 
 interface CartStore {
   items: CartItem[]
+  isOpen: boolean
+  openCart:   () => void
+  closeCart:  () => void
   addItem:    (item: Omit<CartItem, 'quantity'> & { quantity?: number }) => void
   removeItem: (productId: string, color?: string, length?: string) => void
   updateQty:  (productId: string, quantity: number, color?: string, length?: string) => void
@@ -13,6 +16,9 @@ interface CartStore {
 
 export const useCartStore = create<CartStore>((set, get) => ({
   items: [],
+  isOpen: false,
+  openCart:  () => set({ isOpen: true }),
+  closeCart: () => set({ isOpen: false }),
 
   addItem: ({ product, quantity = 1, selectedColor, selectedLength }) => {
     set((state) => {

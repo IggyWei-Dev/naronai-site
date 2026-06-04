@@ -8,121 +8,270 @@ import { Button }              from '@/components/ui/Button'
 import { SectionDivider }      from '@/components/ui/SectionDivider'
 import { formatNaira }         from '@/lib/utils'
 
+const CARD_WIDTH = 380
+
+/* ── Chrome surface ───────────────────────────────────────── */
+const chromeCard: React.CSSProperties = {
+  width: CARD_WIDTH,
+  background: `linear-gradient(
+    150deg,
+    #1a1210 0%,
+    #2e221c 10%,
+    #5c4538 22%,
+    #2a1c16 36%,
+    #1e1410 50%,
+    #3a2b22 64%,
+    #523e32 76%,
+    #2a1c16 88%,
+    #1a1210 100%
+  )`,
+  border: '0.5px solid rgba(195,160,91,0.35)',
+  borderRadius: '16px',
+  boxShadow: `
+    inset 0 1px 0 rgba(195,160,91,0.3),
+    inset 0 -1px 0 rgba(0,0,0,0.7),
+    0 32px 80px rgba(0,0,0,0.55),
+    0 4px 20px rgba(195,160,91,0.08)
+  `,
+  padding: '32px',
+  position: 'relative',
+  overflow: 'hidden',
+}
+
 export default function CartPage() {
   const { items, removeItem, updateQty, total, itemCount } = useCartStore()
 
   if (items.length === 0) {
     return (
-      <div style={{ minHeight: '60vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '24px', padding: '96px 24px' }}>
-        <p className="text-h2" style={{ color: 'var(--color-text-muted)' }}>Your cart is empty</p>
-        <Button variant="ghost" onClick={() => {}}>
-          <Link href="/shop" style={{ textDecoration: 'none', color: 'inherit' }}>Continue Shopping</Link>
-        </Button>
+      <div style={{ minHeight: '60vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '24px', padding: '160px 24px 96px' }}>
+        <p className="text-h2" style={{ color: 'var(--color-text-muted)' }}>Your bag is empty</p>
+        <Link href="/shop" style={{ textDecoration: 'none' }}>
+          <Button variant="ghost">Browse collection</Button>
+        </Link>
       </div>
     )
   }
 
-  const subtotal   = total()
-  const shippingFee = subtotal >= 15_000_000 ? 0 : 300_000
-  const orderTotal = subtotal + shippingFee
+  const subtotal    = total()
+  const shippingFee = subtotal >= 150_000 ? 0 : 3_000
+  const orderTotal  = subtotal + shippingFee
 
   return (
-    <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '64px 64px 96px', display: 'grid', gridTemplateColumns: '1fr 380px', gap: '64px', alignItems: 'start' }}>
+    <>
+      <style>{`
+        @keyframes chrome-sheen {
+          0%   { left: -60%; }
+          50%  { left: 120%; }
+          100% { left: 120%; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          @keyframes chrome-sheen { 0%, 100% { left: -60%; } }
+        }
+      `}</style>
 
-      {/* Cart items */}
-      <div>
-        <h1 className="text-h1" style={{ marginBottom: '40px' }}>
-          Your Cart <span style={{ color: 'var(--color-text-muted)', fontSize: '60%' }}>({itemCount()} {itemCount() === 1 ? 'item' : 'items'})</span>
-        </h1>
+      {/* Two-column grid — matches original layout exactly */}
+      <div style={{
+        maxWidth: '1440px',
+        margin: '0 auto',
+        padding: '140px 64px 96px',
+        display: 'grid',
+        gridTemplateColumns: `1fr ${CARD_WIDTH}px`,
+        gap: '64px',
+        alignItems: 'start',
+      }}>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-          {items.map((item) => (
-            <div
-              key={`${item.product.id}-${item.selectedColor}-${item.selectedLength}`}
-              style={{
-                display: 'grid',
-                gridTemplateColumns: '100px 1fr auto',
-                gap: '20px',
-                alignItems: 'center',
-                padding: '20px 0',
-                borderBottom: '0.5px solid var(--color-border-subtle)',
-              }}
-            >
-              {/* Image */}
-              <div style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden', aspectRatio: '3/4', position: 'relative' }}>
-                {item.product.images[0]
-                  ? <Image src={item.product.images[0]} alt={item.product.name} fill style={{ objectFit: 'cover' }} />
-                  : <div style={{ background: 'var(--color-bg-surface)', width: '100%', height: '100%' }} />
-                }
-              </div>
+        {/* ── Left: cart items ──────────────────────────────── */}
+        <div>
+          <h1 className="text-h1" style={{ marginBottom: '40px' }}>
+            Your bag{' '}
+            <span style={{ color: 'var(--color-text-muted)', fontSize: '60%' }}>
+              ({itemCount()} {itemCount() === 1 ? 'item' : 'items'})
+            </span>
+          </h1>
 
-              {/* Info */}
-              <div>
-                <p style={{ fontFamily: 'var(--font-display)', fontSize: '18px', marginBottom: '4px' }}>{item.product.name}</p>
-                {item.selectedColor  && <p className="text-caption">{item.selectedColor}</p>}
-                {item.selectedLength && <p className="text-caption">{item.selectedLength}</p>}
-                <p style={{ fontFamily: 'var(--font-ui)', fontSize: '13px', color: 'var(--color-accent-gold)', marginTop: '8px' }}>
-                  {formatNaira(item.product.price)}
-                </p>
-              </div>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {items.map((item) => (
+              <div
+                key={`${item.product.id}-${item.selectedColor}-${item.selectedLength}`}
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '100px 1fr auto',
+                  gap: '20px',
+                  alignItems: 'center',
+                  padding: '20px 0',
+                  borderBottom: '0.5px solid var(--color-border-subtle)',
+                }}
+              >
+                {/* Image */}
+                <div style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden', aspectRatio: '3/4', position: 'relative' }}>
+                  {item.product.images[0]
+                    ? <Image src={item.product.images[0]} alt={item.product.name} fill style={{ objectFit: 'cover' }} />
+                    : <div style={{ background: 'var(--color-bg-surface)', width: '100%', height: '100%' }} />
+                  }
+                </div>
 
-              {/* Qty + remove */}
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '12px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', border: '0.5px solid var(--color-border-subtle)', borderRadius: 'var(--radius-sm)', padding: '4px 8px' }}>
-                  <button onClick={() => updateQty(item.product.id, item.quantity - 1, item.selectedColor, item.selectedLength)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-muted)' }}>
-                    <Minus size={12} />
-                  </button>
-                  <span style={{ fontFamily: 'var(--font-ui)', fontSize: '13px', minWidth: '20px', textAlign: 'center' }}>{item.quantity}</span>
-                  <button onClick={() => updateQty(item.product.id, item.quantity + 1, item.selectedColor, item.selectedLength)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-primary)' }}>
-                    <Plus size={12} />
+                {/* Info */}
+                <div>
+                  <p style={{ fontFamily: 'var(--font-display)', fontSize: '18px', marginBottom: '4px', color: 'var(--color-text)' }}>
+                    {item.product.name}
+                  </p>
+                  {item.selectedColor  && <p className="text-caption">{item.selectedColor}</p>}
+                  {item.selectedLength && <p className="text-caption">{item.selectedLength}</p>}
+                  <p style={{ fontFamily: 'var(--font-ui)', fontSize: '13px', color: 'var(--color-accent-gold)', marginTop: '8px' }}>
+                    {formatNaira(item.product.price)}
+                  </p>
+                </div>
+
+                {/* Qty + remove */}
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '12px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', border: '0.5px solid var(--color-border-subtle)', borderRadius: 'var(--radius-sm)', padding: '4px 8px' }}>
+                    <button type="button" onClick={() => updateQty(item.product.id, item.quantity - 1, item.selectedColor, item.selectedLength)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-muted)' }}>
+                      <Minus size={12} />
+                    </button>
+                    <span style={{ fontFamily: 'var(--font-ui)', fontSize: '13px', minWidth: '20px', textAlign: 'center' }}>
+                      {item.quantity}
+                    </span>
+                    <button type="button" onClick={() => updateQty(item.product.id, item.quantity + 1, item.selectedColor, item.selectedLength)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-primary)' }}>
+                      <Plus size={12} />
+                    </button>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => removeItem(item.product.id, item.selectedColor, item.selectedLength)}
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-muted)' }}
+                    aria-label="Remove item"
+                  >
+                    <Trash2 size={14} />
                   </button>
                 </div>
-                <button
-                  onClick={() => removeItem(item.product.id, item.selectedColor, item.selectedLength)}
-                  style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-muted)' }}
-                  aria-label="Remove item"
-                >
-                  <Trash2 size={14} />
-                </button>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+        </div>
+
+        {/* ── Right: spacer that reserves grid space ────────── */}
+        {/* The actual card is fixed below; this keeps the items column the right width */}
+        <div aria-hidden="true" />
+      </div>
+
+      {/* ── Chrome card — fixed, vertically centred ─────────── */}
+      <div
+        className="hidden lg:block"
+        style={{
+          position: 'fixed',
+          top: '50%',
+          /* align right edge with the grid's right padding */
+          right: 'max(64px, calc((100vw - 1440px) / 2 + 64px))',
+          transform: 'translateY(-50%)',
+          zIndex: 20,
+        }}
+      >
+        <div style={chromeCard}>
+          {/* Animated sheen sweep */}
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: '-60%',
+            width: '40%',
+            height: '100%',
+            background: 'linear-gradient(105deg, transparent 0%, rgba(195,160,91,0.08) 50%, transparent 100%)',
+            pointerEvents: 'none',
+            animation: 'chrome-sheen 7s ease-in-out infinite',
+          }} />
+
+          <h2 style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: '20px',
+            fontWeight: 300,
+            fontStyle: 'italic',
+            color: '#F4ECE5',
+            margin: '0 0 24px',
+          }}>
+            Order summary
+          </h2>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '20px' }}>
+            <ChromeRow label="Subtotal" value={formatNaira(subtotal)} />
+            <ChromeRow label="Shipping" value={shippingFee === 0 ? 'Free' : formatNaira(shippingFee)} />
+          </div>
+
+          <div style={{ height: '0.5px', background: 'rgba(195,160,91,0.25)', margin: '4px 0 20px' }} />
+
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '28px' }}>
+            <span style={{ fontFamily: 'var(--font-ui)', fontSize: '8px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(244,236,229,0.4)' }}>
+              Total
+            </span>
+            <span style={{ fontFamily: 'var(--font-display)', fontSize: '26px', fontWeight: 300, color: '#C3A05B', letterSpacing: '-0.01em' }}>
+              {formatNaira(orderTotal)}
+            </span>
+          </div>
+
+          <Link
+            href="/checkout"
+            style={{
+              display: 'block',
+              padding: '14px',
+              background: '#7A2F4B',
+              color: '#F4ECE5',
+              borderRadius: '2px',
+              fontFamily: 'var(--font-ui)',
+              fontSize: '10px',
+              letterSpacing: '0.18em',
+              textTransform: 'uppercase',
+              textDecoration: 'none',
+              textAlign: 'center',
+            }}
+          >
+            Proceed to checkout
+          </Link>
+
+          <p style={{ fontFamily: 'var(--font-body)', fontSize: '10px', color: 'rgba(244,236,229,0.3)', textAlign: 'center', marginTop: '14px', lineHeight: 1.5 }}>
+            Free shipping on orders over ₦150,000
+          </p>
         </div>
       </div>
 
-      {/* Order summary */}
-      <div style={{ background: 'var(--color-bg-card)', border: '0.5px solid var(--color-border-medium)', borderRadius: 'var(--radius-xl)', padding: '32px', position: 'sticky', top: '100px' }}>
-        <h2 className="text-h3" style={{ marginBottom: '24px' }}>Order Summary</h2>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '20px' }}>
-          <Row label="Subtotal"     value={formatNaira(subtotal)} />
-          <Row label="Shipping"     value={shippingFee === 0 ? 'Free' : formatNaira(shippingFee)} />
+      {/* ── Mobile summary — inline ───────────────────────── */}
+      <div
+        className="lg:hidden"
+        style={{ padding: '0 24px 80px' }}
+      >
+        <div style={{ background: 'var(--color-bg-card)', border: '0.5px solid var(--color-border)', borderRadius: '8px', padding: '24px' }}>
+          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '18px', fontWeight: 300, color: 'var(--color-text)', margin: '0 0 20px' }}>
+            Order summary
+          </h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '16px' }}>
+            <Row label="Subtotal" value={formatNaira(subtotal)} />
+            <Row label="Shipping" value={shippingFee === 0 ? 'Free' : formatNaira(shippingFee)} />
+          </div>
+          <SectionDivider />
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '24px' }}>
+            <span style={{ fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-text-muted)' }}>Total</span>
+            <span style={{ fontFamily: 'var(--font-display)', fontSize: '22px', color: 'var(--color-accent-gold)' }}>{formatNaira(orderTotal)}</span>
+          </div>
+          <Link href="/checkout" style={{ display: 'block', padding: '14px', background: '#7A2F4B', color: '#F4ECE5', borderRadius: '2px', fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.16em', textTransform: 'uppercase', textDecoration: 'none', textAlign: 'center' }}>
+            Proceed to checkout
+          </Link>
         </div>
-
-        <SectionDivider />
-
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '28px' }}>
-          <span style={{ fontFamily: 'var(--font-ui)', fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Total</span>
-          <span style={{ fontFamily: 'var(--font-display)', fontSize: '22px', color: 'var(--color-accent-gold)' }}>{formatNaira(orderTotal)}</span>
-        </div>
-
-        <Link href="/checkout" style={{ display: 'block' }}>
-          <Button variant="primary" className="w-full">Proceed to Checkout</Button>
-        </Link>
-
-        <p style={{ fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.08em', color: 'var(--color-text-muted)', textAlign: 'center', marginTop: '16px' }}>
-          Free shipping on orders over ₦150,000
-        </p>
       </div>
-    </div>
+    </>
   )
 }
 
 function Row({ label, value }: { label: string; value: string }) {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-      <span style={{ fontFamily: 'var(--font-ui)', fontSize: '11px', letterSpacing: '0.08em', color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>{label}</span>
+      <span style={{ fontFamily: 'var(--font-ui)', fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-text-muted)' }}>{label}</span>
       <span style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--color-text-primary)' }}>{value}</span>
+    </div>
+  )
+}
+
+function ChromeRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <span style={{ fontFamily: 'var(--font-ui)', fontSize: '9px', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(244,236,229,0.4)' }}>{label}</span>
+      <span style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'rgba(244,236,229,0.75)' }}>{value}</span>
     </div>
   )
 }

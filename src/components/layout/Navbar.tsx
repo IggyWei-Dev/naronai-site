@@ -3,8 +3,9 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Search, User, ShoppingBag, Sun, Moon } from 'lucide-react'
-import { useCartStore } from '@/lib/store/cartStore'
-import { useTheme } from '@/lib/hooks/useTheme'
+import { useCartStore }   from '@/lib/store/cartStore'
+import { useSearchStore } from '@/lib/store/searchStore'
+import { useTheme }       from '@/lib/hooks/useTheme'
 import { StaggeredMenu } from '@/components/ui/StaggeredMenu'
 import { createClient } from '@/lib/supabase/client'
 
@@ -33,7 +34,8 @@ export function Navbar() {
   const [barOffset, setBarOffset] = useState(ANNOUNCEMENT_BAR_HEIGHT)
   const [atTop,     setAtTop]     = useState(true)
   const [isSignedIn, setIsSignedIn] = useState(false)
-  const cartCount = useCartStore((s) => s.itemCount())
+  const cartCount   = useCartStore((s) => s.itemCount())
+  const openSearch  = useSearchStore(s => s.openSearch)
   const { theme, toggle } = useTheme()
 
   useEffect(() => {
@@ -61,16 +63,20 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  const inkColor = theme === 'light' ? '#7A2F4B' : '#F4ECE5'
+
   const navBase: React.CSSProperties = {
     position: 'fixed',
     top: barOffset,
     left: 0,
     right: 0,
     zIndex: 50,
-    background: atTop ? 'transparent' : 'rgba(46, 29, 27, 0.35)',
+    background: atTop
+      ? theme === 'light' ? 'rgba(46,29,27,0.18)' : 'transparent'
+      : 'rgba(46,29,27,0.35)',
     backdropFilter: 'blur(12px)',
     WebkitBackdropFilter: 'blur(12px)',
-    transition: 'background 300ms ease',
+    transition: 'background 300ms ease, color 300ms ease',
   }
 
   const linkStyle: React.CSSProperties = {
@@ -78,9 +84,10 @@ export function Navbar() {
     fontSize: '10px',
     letterSpacing: '0.12em',
     textTransform: 'uppercase' as const,
-    color: '#F4ECE5',
+    color: inkColor,
     textDecoration: 'none',
     position: 'relative' as const,
+    transition: 'color 300ms ease',
   }
 
   return (
@@ -109,16 +116,17 @@ export function Navbar() {
               flexShrink: 0,
             }}
           >
-            <NaronaiMark size={32} color="#F4ECE5" />
+            <NaronaiMark size={32} color={inkColor} />
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1px' }}>
               <span style={{
                 fontFamily: 'var(--font-display)',
                 fontSize: '18px',
                 letterSpacing: '0.45em',
                 textTransform: 'uppercase',
-                color: '#F4ECE5',
+                color: inkColor,
                 fontWeight: 300,
                 lineHeight: 1,
+                transition: 'color 300ms ease',
               }}>
                 NARONAI
               </span>
@@ -127,8 +135,9 @@ export function Navbar() {
                 fontSize: '7px',
                 letterSpacing: '0.22em',
                 textTransform: 'uppercase',
-                color: 'rgba(244,236,229,0.5)',
+                color: theme === 'light' ? 'rgba(122,47,75,0.55)' : 'rgba(244,236,229,0.5)',
                 lineHeight: 1,
+                transition: 'color 300ms ease',
               }}>
                 Leave an Impression
               </span>
@@ -151,12 +160,12 @@ export function Navbar() {
 
           {/* Icon buttons */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '22px', flexShrink: 0 }}>
-            <IconButton href="/search"  label="Search"><Search size={16} /></IconButton>
-            <IconButton href={isSignedIn ? '/account' : '/auth/sign-in'} label="Account"><User size={16} /></IconButton>
-            <button onClick={toggle} aria-label="Toggle theme" style={{ color: '#F4ECE5', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', opacity: 0.85, padding: 0 }}>
+            <button onClick={openSearch} aria-label="Open search" style={{ color: inkColor, background: 'none', border: 'none', cursor: 'pointer', display: 'flex', opacity: 0.85, padding: 0, transition: 'color 300ms ease, opacity 200ms' }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = '1' }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = '0.85' }}><Search size={16} /></button>
+            <IconButton href={isSignedIn ? '/account' : '/auth/sign-in'} label="Account" color={inkColor}><User size={16} /></IconButton>
+            <button onClick={toggle} aria-label="Toggle theme" style={{ color: inkColor, background: 'none', border: 'none', cursor: 'pointer', display: 'flex', opacity: 0.85, padding: 0, transition: 'color 300ms ease' }}>
               {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
             </button>
-            <CartButton count={cartCount} />
+            <CartButton count={cartCount} color={inkColor} />
           </div>
         </div>
       </nav>
@@ -169,22 +178,22 @@ export function Navbar() {
         items={MOBILE_NAV_ITEMS}
         colors={['#E8B8AA', '#7A2F4B']}
         accentColor="#C3A05B"
-        menuButtonColor="#F4ECE5"
-        openMenuButtonColor="#F4ECE5"
+        menuButtonColor={inkColor}
+        openMenuButtonColor={inkColor}
         logoNode={
           <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <NaronaiMark size={26} color="#F4ECE5" />
+            <NaronaiMark size={26} color={inkColor} />
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1px' }}>
-              <span style={{ fontFamily: 'var(--font-display)', fontSize: '14px', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#F4ECE5', fontWeight: 300, lineHeight: 1 }}>
+              <span style={{ fontFamily: 'var(--font-display)', fontSize: '14px', letterSpacing: '0.3em', textTransform: 'uppercase', color: inkColor, fontWeight: 300, lineHeight: 1 }}>
                 NARONAI
               </span>
-              <span style={{ fontFamily: 'var(--font-ui)', fontSize: '6px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(244,236,229,0.5)', lineHeight: 1 }}>
+              <span style={{ fontFamily: 'var(--font-ui)', fontSize: '6px', letterSpacing: '0.2em', textTransform: 'uppercase', color: theme === 'light' ? 'rgba(122,47,75,0.55)' : 'rgba(244,236,229,0.5)', lineHeight: 1 }}>
                 Leave an Impression
               </span>
             </div>
           </Link>
         }
-        headerActions={<CartButton count={cartCount} />}
+        headerActions={<CartButton count={cartCount} color={inkColor} />}
       />
     </>
   )
@@ -200,12 +209,12 @@ function NavLink({ href, style, children }: { href: string; style: React.CSSProp
   )
 }
 
-function IconButton({ href, label, children }: { href: string; label: string; children: React.ReactNode }) {
+function IconButton({ href, label, color, children }: { href: string; label: string; color: string; children: React.ReactNode }) {
   return (
     <Link href={href} aria-label={label} style={{
-      color: '#F4ECE5',
+      color,
       display: 'flex',
-      transition: 'color 200ms, opacity 200ms',
+      transition: 'color 300ms ease, opacity 200ms',
       opacity: 0.85,
     }}
     onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.opacity = '1' }}
@@ -216,15 +225,24 @@ function IconButton({ href, label, children }: { href: string; label: string; ch
   )
 }
 
-function CartButton({ count }: { count: number }) {
+function CartButton({ count, color }: { count: number; color: string }) {
+  const openCart = useCartStore(s => s.openCart)
   return (
-    <Link href="/cart" aria-label={`Cart, ${count} items`} style={{
-      position: 'relative',
-      color: '#F4ECE5',
-      display: 'flex',
-      opacity: 0.85,
-      transition: 'opacity 200ms',
-    }}>
+    <button
+      onClick={openCart}
+      aria-label={`Open bag, ${count} items`}
+      style={{
+        position: 'relative',
+        color,
+        display: 'flex',
+        opacity: 0.85,
+        transition: 'color 300ms ease, opacity 200ms',
+        background: 'none',
+        border: 'none',
+        cursor: 'pointer',
+        padding: 0,
+      }}
+    >
       <ShoppingBag size={18} />
       {count > 0 && (
         <span style={{
@@ -241,7 +259,7 @@ function CartButton({ count }: { count: number }) {
           {count > 9 ? '9+' : count}
         </span>
       )}
-    </Link>
+    </button>
   )
 }
 
