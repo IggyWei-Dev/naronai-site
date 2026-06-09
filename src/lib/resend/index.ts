@@ -2,10 +2,10 @@ import { Resend } from 'resend'
 import type { Order } from '@/types'
 import { formatNaira } from '@/lib/utils'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-const FROM   = process.env.RESEND_FROM_EMAIL ?? 'orders@naronai.com'
+const FROM = process.env.RESEND_FROM_EMAIL ?? 'orders@naronai.com'
 
 export async function sendOrderConfirmation(order: Order, email: string) {
+  const resend = new Resend(process.env.RESEND_API_KEY)
   const itemRows = order.items
     .map(
       (item) =>
