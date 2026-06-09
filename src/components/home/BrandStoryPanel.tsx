@@ -39,7 +39,7 @@ export function BrandStoryPanel() {
                 display: 'block',
                 width: '48px',
                 height: '1px',
-                background: '#E8B8AA',
+                background: 'var(--color-surface)',
                 marginBottom: '20px',
               }}
             />
@@ -47,9 +47,9 @@ export function BrandStoryPanel() {
             <div style={{ overflow: 'hidden', height: 'clamp(130px, 40vw, 210px)', width: '100%', marginBottom: '20px' }}>
               <Signature
                 text="Naronai"
-                color="#7A2F4B"
+                color="var(--color-primary)"
                 shimmer
-                shimmerHighlight="#C3A05B"
+                shimmerHighlight="var(--color-gold)"
                 fontSize={96}
                 duration={2}
                 delay={0.3}
@@ -123,7 +123,7 @@ export function BrandStoryPanel() {
             className="relative overflow-hidden"
             style={{
               aspectRatio: '3 / 4',
-              boxShadow: '0 20px 72px rgba(46, 29, 27, 0.18)',
+              boxShadow: '0 20px 72px color-mix(in srgb, var(--color-midnight) 18%, transparent)',
               maxHeight: 'clamp(260px, 80vw, 600px)',
             }}
           >
@@ -140,7 +140,7 @@ export function BrandStoryPanel() {
               style={{
                 position: 'absolute',
                 inset: 0,
-                background: 'linear-gradient(to bottom, transparent 55%, rgba(247,242,236,0.35) 100%)',
+                background: 'linear-gradient(to bottom, transparent 55%, color-mix(in srgb, var(--color-bg) 35%, transparent) 100%)',
                 pointerEvents: 'none',
               }}
             />

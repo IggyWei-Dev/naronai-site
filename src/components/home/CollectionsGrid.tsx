@@ -80,7 +80,7 @@ function AccordionCard({
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'linear-gradient(to top, rgba(46,29,27,0.92) 0%, rgba(46,29,27,0.12) 55%, transparent 100%)',
+            'linear-gradient(to top, color-mix(in srgb, var(--color-midnight) 92%, transparent) 0%, color-mix(in srgb, var(--color-midnight) 12%, transparent) 55%, transparent 100%)',
         }}
       />
 
@@ -94,7 +94,7 @@ function AccordionCard({
             transition={{ duration: 0.3 }}
             aria-hidden="true"
             className="pointer-events-none absolute inset-0"
-            style={{ background: 'rgba(46,29,27,0.3)' }}
+            style={{ background: 'color-mix(in srgb, var(--color-midnight) 30%, transparent)' }}
           />
         )}
       </AnimatePresence>
@@ -115,7 +115,7 @@ function AccordionCard({
                 fontSize: '8px',
                 letterSpacing: '0.22em',
                 textTransform: 'uppercase',
-                color: '#E8B8AA',
+                color: 'var(--color-surface)',
                 marginBottom: '7px',
               }}
             >
@@ -126,7 +126,7 @@ function AccordionCard({
                 fontFamily: 'var(--font-display)',
                 fontSize: 'clamp(20px, 4vw, 38px)',
                 fontWeight: 300,
-                color: '#F4ECE5',
+                color: 'var(--color-on-dark)',
                 lineHeight: 1.05,
                 marginBottom: '12px',
               }}
@@ -138,7 +138,7 @@ function AccordionCard({
                 fontFamily: 'var(--font-body)',
                 fontSize: '11px',
                 lineHeight: 1.72,
-                color: 'rgba(244,236,229,0.78)',
+                color: 'color-mix(in srgb, var(--color-on-dark) 78%, transparent)',
                 margin: '0 0 14px',
               }}
             >

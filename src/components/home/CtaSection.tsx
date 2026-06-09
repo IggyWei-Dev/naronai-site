@@ -10,7 +10,7 @@ export function CtaSection() {
     <section
       aria-label="Call to action"
       style={{
-        background: 'linear-gradient(160deg, #1a0f0d 0%, #2E1D1B 40%, #3d2218 70%, #1a0f0d 100%)',
+        background: 'var(--cta-bg)',
         position: 'relative',
         overflow: 'hidden',
         padding: 'clamp(80px, 12vw, 140px) clamp(24px, 6vw, 96px)',
@@ -66,7 +66,7 @@ export function CtaSection() {
           fontSize: 'clamp(36px, 6vw, 68px)',
           fontWeight: 300,
           fontStyle: 'italic',
-          color: '#F4ECE5',
+          color: 'var(--color-text)',
           lineHeight: 1.12,
           letterSpacing: '-0.02em',
           margin: '0 0 24px',
@@ -78,7 +78,7 @@ export function CtaSection() {
         <p style={{
           fontFamily: 'var(--font-body)',
           fontSize: 'clamp(14px, 1.8vw, 17px)',
-          color: 'rgba(244,236,229,0.55)',
+          color: 'var(--color-text-sub)',
           lineHeight: 1.7,
           maxWidth: '480px',
           margin: '0 auto 48px',
@@ -117,8 +117,8 @@ export function CtaSection() {
               display: 'inline-block',
               padding: '15px 36px',
               background: 'transparent',
-              color: 'rgba(244,236,229,0.75)',
-              border: '0.5px solid rgba(244,236,229,0.25)',
+              color: 'var(--cta-ghost-text)',
+              border: '0.5px solid var(--cta-ghost-border)',
               borderRadius: '2px',
               fontFamily: 'var(--font-ui)',
               fontSize: '10px',

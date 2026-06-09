@@ -63,7 +63,7 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const inkColor = theme === 'light' ? '#7A2F4B' : '#F4ECE5'
+  const inkColor = theme === 'light' ? 'var(--color-primary)' : 'var(--color-on-dark)'
 
   const navBase: React.CSSProperties = {
     position: 'fixed',
@@ -72,11 +72,15 @@ export function Navbar() {
     right: 0,
     zIndex: 50,
     background: atTop
-      ? theme === 'light' ? 'rgba(46,29,27,0.18)' : 'transparent'
-      : 'rgba(46,29,27,0.35)',
-    backdropFilter: 'blur(12px)',
-    WebkitBackdropFilter: 'blur(12px)',
-    transition: 'background 300ms ease, color 300ms ease',
+      ? theme === 'light'
+        ? 'color-mix(in srgb, var(--color-on-dark) 48%, transparent)'
+        : 'rgba(0,0,0,0.22)'
+      : theme === 'light'
+        ? 'color-mix(in srgb, var(--color-on-dark) 88%, transparent)'
+        : 'color-mix(in srgb, var(--color-midnight) 72%, transparent)',
+    backdropFilter: 'blur(18px)',
+    WebkitBackdropFilter: 'blur(18px)',
+    transition: 'top 280ms ease, background 300ms ease, color 300ms ease',
   }
 
   const linkStyle: React.CSSProperties = {
@@ -88,6 +92,7 @@ export function Navbar() {
     textDecoration: 'none',
     position: 'relative' as const,
     transition: 'color 300ms ease',
+    textShadow: 'none',
   }
 
   return (
@@ -135,7 +140,7 @@ export function Navbar() {
                 fontSize: '7px',
                 letterSpacing: '0.22em',
                 textTransform: 'uppercase',
-                color: theme === 'light' ? 'rgba(122,47,75,0.55)' : 'rgba(244,236,229,0.5)',
+                color: theme === 'light' ? 'color-mix(in srgb, var(--color-primary) 55%, transparent)' : 'color-mix(in srgb, var(--color-on-dark) 50%, transparent)',
                 lineHeight: 1,
                 transition: 'color 300ms ease',
               }}>
@@ -175,9 +180,10 @@ export function Navbar() {
         className="lg:hidden"
         isFixed
         position="right"
+        topOffset={barOffset}
         items={MOBILE_NAV_ITEMS}
-        colors={['#E8B8AA', '#7A2F4B']}
-        accentColor="#C3A05B"
+        colors={['var(--color-surface)', 'var(--color-primary)']}
+        accentColor="var(--color-gold)"
         menuButtonColor={inkColor}
         openMenuButtonColor={inkColor}
         logoNode={
@@ -187,7 +193,7 @@ export function Navbar() {
               <span style={{ fontFamily: 'var(--font-display)', fontSize: '14px', letterSpacing: '0.3em', textTransform: 'uppercase', color: inkColor, fontWeight: 300, lineHeight: 1 }}>
                 NARONAI
               </span>
-              <span style={{ fontFamily: 'var(--font-ui)', fontSize: '6px', letterSpacing: '0.2em', textTransform: 'uppercase', color: theme === 'light' ? 'rgba(122,47,75,0.55)' : 'rgba(244,236,229,0.5)', lineHeight: 1 }}>
+              <span style={{ fontFamily: 'var(--font-ui)', fontSize: '6px', letterSpacing: '0.2em', textTransform: 'uppercase', color: theme === 'light' ? 'color-mix(in srgb, var(--color-primary) 55%, transparent)' : 'color-mix(in srgb, var(--color-on-dark) 50%, transparent)', lineHeight: 1 }}>
                 Leave an Impression
               </span>
             </div>
@@ -248,7 +254,7 @@ function CartButton({ count, color }: { count: number; color: string }) {
         <span style={{
           position: 'absolute', top: '-6px', right: '-7px',
           background: 'var(--color-accent-gold)',
-          color: '#2E1D1B',
+          color: 'var(--color-midnight)',
           fontFamily: 'var(--font-ui)',
           fontSize: '8px',
           fontWeight: 600,

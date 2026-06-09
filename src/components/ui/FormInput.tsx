@@ -37,7 +37,7 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
             'font-body text-[15px] text-[var(--color-text-primary)]',
             'placeholder:text-[var(--color-text-muted)]',
             'focus:outline-none focus:border-[var(--color-accent-gold)]',
-            'focus:shadow-[0_0_0_3px_rgba(195,160,91,0.12)]',
+            'focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--color-gold)_12%,transparent)]',
             'transition-[border-color,box-shadow] duration-200',
             error && 'border-red-400',
             className,
@@ -49,7 +49,7 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
             initial={{ opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.18, ease: 'easeOut' }}
-            style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: '#e57373' }}
+            style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'var(--color-error)' }}
           >
             {error}
           </motion.span>
@@ -94,7 +94,7 @@ export const FormTextarea = forwardRef<HTMLTextAreaElement, FormTextareaProps>(
             'font-body text-[15px] text-[var(--color-text-primary)]',
             'placeholder:text-[var(--color-text-muted)]',
             'focus:outline-none focus:border-[var(--color-accent-gold)]',
-            'focus:shadow-[0_0_0_3px_rgba(195,160,91,0.12)]',
+            'focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--color-gold)_12%,transparent)]',
             'transition-[border-color,box-shadow] duration-200',
             error && 'border-red-400',
             className,
@@ -106,7 +106,7 @@ export const FormTextarea = forwardRef<HTMLTextAreaElement, FormTextareaProps>(
             initial={{ opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.18, ease: 'easeOut' }}
-            style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: '#e57373' }}
+            style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'var(--color-error)' }}
           >
             {error}
           </motion.span>

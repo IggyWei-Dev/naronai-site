@@ -13,7 +13,7 @@ export function AuthShell({ children, imageSrc, imageAlt = '' }: AuthShellProps)
     <div style={{
       display: 'flex',
       minHeight: '100dvh',
-      background: '#2E1D1B',
+      background: 'var(--color-midnight)',
     }}>
 
       {/* ── Left brand panel (lg+) ──────────────────────────────── */}
@@ -23,7 +23,7 @@ export function AuthShell({ children, imageSrc, imageAlt = '' }: AuthShellProps)
         style={{
           width: '38%',
           flexShrink: 0,
-          background: '#2E1D1B',
+          background: 'var(--color-midnight)',
           flexDirection: 'column',
           justifyContent: 'space-between',
           padding: 'clamp(52px, 7vh, 88px) clamp(44px, 5vw, 76px)',
@@ -51,7 +51,7 @@ export function AuthShell({ children, imageSrc, imageAlt = '' }: AuthShellProps)
             <div style={{
               position: 'absolute',
               inset: 0,
-              background: 'linear-gradient(to bottom, rgba(46,29,27,0.72) 0%, rgba(46,29,27,0.35) 45%, rgba(46,29,27,0.78) 100%)',
+              background: 'linear-gradient(to bottom, color-mix(in srgb, var(--color-midnight) 72%, transparent) 0%, color-mix(in srgb, var(--color-midnight) 35%, transparent) 45%, color-mix(in srgb, var(--color-midnight) 78%, transparent) 100%)',
             }} />
           </div>
         )}
@@ -61,7 +61,7 @@ export function AuthShell({ children, imageSrc, imageAlt = '' }: AuthShellProps)
           <Link href="/" style={{ display: 'block' }}>
             <Signature
               text="Naronai"
-              color="#C3A05B"
+              color="var(--color-gold)"
               fontSize={72}
               strokeWidth={0.55}
               duration={2.2}
@@ -74,7 +74,7 @@ export function AuthShell({ children, imageSrc, imageAlt = '' }: AuthShellProps)
             <div style={{
               width: '40px',
               height: '0.5px',
-              background: 'rgba(195,160,91,0.4)',
+              background: 'color-mix(in srgb, var(--color-gold) 40%, transparent)',
               marginBottom: '20px',
             }} />
             <p style={{
@@ -82,7 +82,7 @@ export function AuthShell({ children, imageSrc, imageAlt = '' }: AuthShellProps)
               fontSize: 'clamp(17px, 1.8vw, 22px)',
               fontWeight: 300,
               fontStyle: 'italic',
-              color: 'rgba(244,236,229,0.75)',
+              color: 'color-mix(in srgb, var(--color-on-dark) 75%, transparent)',
               lineHeight: 1.4,
               margin: 0,
             }}>
@@ -101,9 +101,9 @@ export function AuthShell({ children, imageSrc, imageAlt = '' }: AuthShellProps)
                 fontSize: '8px',
                 letterSpacing: '0.18em',
                 textTransform: 'uppercase' as const,
-                color: 'rgba(195,160,91,0.55)',
+                color: 'color-mix(in srgb, var(--color-gold) 55%, transparent)',
                 padding: '5px 10px',
-                border: '0.5px solid rgba(195,160,91,0.2)',
+                border: '0.5px solid color-mix(in srgb, var(--color-gold) 20%, transparent)',
               }}
             >
               {city}
@@ -120,7 +120,7 @@ export function AuthShell({ children, imageSrc, imageAlt = '' }: AuthShellProps)
               paddingTop: '70%',
               bottom: '-20%',
               right: '-18%',
-              background: 'radial-gradient(circle, rgba(122,47,75,0.28) 0%, transparent 68%)',
+              background: 'radial-gradient(circle, color-mix(in srgb, var(--color-primary) 28%, transparent) 0%, transparent 68%)',
               borderRadius: '50%',
               pointerEvents: 'none',
             }} />
@@ -130,7 +130,7 @@ export function AuthShell({ children, imageSrc, imageAlt = '' }: AuthShellProps)
               paddingTop: '45%',
               top: '-10%',
               left: '-12%',
-              background: 'radial-gradient(circle, rgba(195,160,91,0.10) 0%, transparent 68%)',
+              background: 'radial-gradient(circle, color-mix(in srgb, var(--color-gold) 10%, transparent) 0%, transparent 68%)',
               borderRadius: '50%',
               pointerEvents: 'none',
             }} />
@@ -151,7 +151,7 @@ export function AuthShell({ children, imageSrc, imageAlt = '' }: AuthShellProps)
         <div
           className="flex lg:hidden"
           style={{
-            background: '#2E1D1B',
+            background: 'var(--color-midnight)',
             padding: '28px 28px 24px',
             flexDirection: 'column',
             gap: '12px',
@@ -160,7 +160,7 @@ export function AuthShell({ children, imageSrc, imageAlt = '' }: AuthShellProps)
           <Link href="/" style={{ display: 'inline-block' }}>
             <Signature
               text="Naronai"
-              color="#C3A05B"
+              color="var(--color-gold)"
               fontSize={22}
               strokeWidth={0.8}
               duration={1.6}
@@ -172,7 +172,7 @@ export function AuthShell({ children, imageSrc, imageAlt = '' }: AuthShellProps)
             fontSize: '14px',
             fontWeight: 300,
             fontStyle: 'italic',
-            color: 'rgba(244,236,229,0.55)',
+            color: 'color-mix(in srgb, var(--color-on-dark) 55%, transparent)',
             margin: 0,
           }}>
             Enter the room changed.

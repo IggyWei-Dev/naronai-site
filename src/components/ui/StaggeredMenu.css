@@ -25,10 +25,10 @@
   align-items: center;
   justify-content: space-between;
   padding: 14px 20px;
-  background: rgba(46, 29, 27, 0.45);
+  background: color-mix(in srgb, var(--color-midnight) 45%, transparent);
   backdrop-filter: blur(20px) saturate(1.5);
   -webkit-backdrop-filter: blur(20px) saturate(1.5);
-  border-bottom: 0.5px solid rgba(195, 160, 91, 0.12);
+  border-bottom: 0.5px solid color-mix(in srgb, var(--color-gold) 12%, transparent);
   pointer-events: none;
   z-index: 20;
 }
@@ -58,7 +58,7 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  color: #F4ECE5;
+  color: var(--color-on-dark);
   font-family: var(--font-ui);
   font-size: 10px;
   letter-spacing: 0.12em;
@@ -69,7 +69,7 @@
 }
 
 .sm-toggle:focus-visible {
-  outline: 2px solid rgba(195, 160, 91, 0.6);
+  outline: 2px solid color-mix(in srgb, var(--color-gold) 60%, transparent);
   outline-offset: 4px;
   border-radius: 4px;
 }
@@ -121,7 +121,7 @@
   right: 0;
   width: 100%;
   height: 100%;
-  background: #2E1D1B;
+  background: var(--color-midnight);
   display: flex;
   flex-direction: column;
   padding: 100px 32px 48px 32px;
@@ -186,7 +186,7 @@
 
 .sm-panel-item {
   position: relative;
-  color: #F4ECE5;
+  color: var(--color-on-dark);
   font-family: var(--font-display);
   font-weight: 300;
   font-size: clamp(2.5rem, 10vw, 3.5rem);
@@ -272,7 +272,7 @@
   font-family: var(--font-ui);
   font-size: 12px;
   font-weight: 400;
-  color: rgba(244, 236, 229, 0.55);
+  color: color-mix(in srgb, var(--color-on-dark) 55%, transparent);
   text-decoration: none;
   display: inline-block;
   transition: color 0.25s ease, opacity 0.25s ease;
@@ -293,7 +293,7 @@
   display: block;
   width: 48px;
   height: 1px;
-  background: rgba(195, 160, 91, 0.25);
+  background: color-mix(in srgb, var(--color-gold) 25%, transparent);
   margin-top: 8px;
 }
 

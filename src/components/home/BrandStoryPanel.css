@@ -3,7 +3,7 @@
   padding-top: 65%;
   top: -20%;
   right: -10%;
-  background: radial-gradient(circle, rgba(235, 197, 186, 0.60) 0%, transparent 68%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--color-surface) 60%, transparent) 0%, transparent 68%);
   animation: blush-orb-drift-a 32s ease-in-out infinite;
   animation-delay: -9s;
 }
@@ -13,7 +13,7 @@
   padding-top: 52%;
   bottom: -15%;
   left: -8%;
-  background: radial-gradient(circle, rgba(212, 144, 138, 0.40) 0%, transparent 68%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--color-surface) 40%, transparent) 0%, transparent 68%);
   animation: blush-orb-drift-b 40s ease-in-out infinite;
   animation-delay: -18s;
 }
@@ -23,7 +23,7 @@
   padding-top: 40%;
   top: 35%;
   left: 42%;
-  background: radial-gradient(circle, rgba(232, 184, 170, 0.35) 0%, transparent 68%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--color-surface) 35%, transparent) 0%, transparent 68%);
   animation: blush-orb-drift-c 24s ease-in-out infinite;
   animation-delay: -5s;
 }

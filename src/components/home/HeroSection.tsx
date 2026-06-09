@@ -34,7 +34,7 @@ export function HeroSection() {
         minHeight: '600px',
         position: 'relative',
         overflow: 'hidden',
-        background: '#2E1D1B',
+        background: 'var(--color-bg)',
         display: 'flex',
         alignItems: 'stretch',
       }}
@@ -60,7 +60,7 @@ export function HeroSection() {
         <div style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(to bottom, rgba(46,29,27,0.18) 0%, rgba(46,29,27,0.42) 38%, rgba(46,29,27,0.84) 68%, #2E1D1B 92%)',
+          background: 'var(--hero-overlay-mobile)',
         }} />
       </div>
 
@@ -77,17 +77,17 @@ export function HeroSection() {
         {/* Left-edge blend */}
         <div style={{
           position: 'absolute', inset: 0, zIndex: 2, pointerEvents: 'none',
-          background: 'linear-gradient(to right, #2E1D1B 0%, rgba(46,29,27,0.68) 22%, rgba(46,29,27,0.22) 50%, transparent 72%)',
+          background: 'var(--hero-blend-left)',
         }} />
         {/* Bottom fade */}
         <div style={{
           position: 'absolute', bottom: 0, left: 0, right: 0, height: '24%', zIndex: 2, pointerEvents: 'none',
-          background: 'linear-gradient(to top, #2E1D1B 0%, transparent 100%)',
+          background: 'var(--hero-blend-bottom)',
         }} />
         {/* Right vignette */}
         <div style={{
           position: 'absolute', inset: 0, zIndex: 2, pointerEvents: 'none',
-          background: 'radial-gradient(ellipse at 82% 50%, transparent 52%, rgba(46,29,27,0.42) 100%)',
+          background: 'var(--hero-blend-vignette)',
         }} />
 
         {/* Parallax image */}
@@ -132,7 +132,7 @@ export function HeroSection() {
             fontWeight: 300,
             lineHeight: 1.0,
             letterSpacing: '-0.01em',
-            color: '#F4ECE5',
+            color: 'var(--color-text)',
             margin: 0,
           }}>
             Luxury Hair.<br />
@@ -145,7 +145,7 @@ export function HeroSection() {
           <motion.p {...fade(1)} style={{
             fontFamily: 'var(--font-body)',
             fontSize: '15px',
-            color: '#D7B2A5',
+            color: 'var(--color-text-sub)',
             lineHeight: 1.75,
             margin: 0,
             maxWidth: '270px',
@@ -197,7 +197,7 @@ export function HeroSection() {
           fontSize: '8px',
           letterSpacing: '0.2em',
           textTransform: 'uppercase',
-          color: 'rgba(185,147,157,0.5)',
+          color: 'var(--color-text-muted)',
         }}>
           Scroll
         </span>
@@ -207,7 +207,7 @@ export function HeroSection() {
           style={{
             width: '1px',
             height: '28px',
-            background: 'linear-gradient(to bottom, rgba(185,147,157,0.5), transparent)',
+            background: 'linear-gradient(to bottom, var(--color-text-muted), transparent)',
           }}
         />
       </motion.div>

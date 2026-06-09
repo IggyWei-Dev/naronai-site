@@ -9,8 +9,8 @@ interface BadgeProps {
 }
 
 const variantStyles: Record<BadgeVariant, React.CSSProperties> = {
-  'tier':     { background: 'rgba(195,160,91,0.15)', color: 'var(--color-accent-gold)' },
-  'new':      { background: 'rgba(122,47,75,0.15)',  color: 'var(--color-accent-primary)' },
+  'tier':     { background: 'color-mix(in srgb, var(--color-gold) 15%, transparent)', color: 'var(--color-accent-gold)' },
+  'new':      { background: 'color-mix(in srgb, var(--color-primary) 15%, transparent)',  color: 'var(--color-accent-primary)' },
   'sold-out': { background: 'var(--color-border-subtle)', color: 'var(--color-text-muted)' },
 }
 

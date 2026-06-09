@@ -41,7 +41,7 @@ export function Signature({
   color = "currentColor",
   gradient,
   shimmer = false,
-  shimmerHighlight = "#F4ECE5",
+  shimmerHighlight = "var(--color-on-dark)",
   fontSize = 32,
   duration = 1.5,
   delay = 0,

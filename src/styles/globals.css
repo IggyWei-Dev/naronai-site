@@ -18,6 +18,11 @@
   --color-primary:      #7A2F4B;
   --color-gold:         #C3A05B;
 
+  /* ── Functional / state colors ── */
+  --color-on-dark:      #F4ECE5;   /* always-cream: text on dark or primary surfaces */
+  --color-error:        #e57373;   /* error / destructive feedback */
+  --color-success:      #7aab7a;   /* success / confirmed feedback */
+
   /* ── Brand effects ── */
   --gradient-primary:   linear-gradient(160deg, #D7B2A5, #7A2F4B);
   --gradient-accent:    linear-gradient(160deg, #F4ECE5, #E5D2C6);
@@ -26,6 +31,22 @@
   --overlay-light:      rgba(46,29,27,0.20);
   --overlay-mid:        rgba(46,29,27,0.50);
   --overlay-heavy:      rgba(46,29,27,0.80);
+
+  /* ── Dark panel gradient (cart / checkout / account drawers) ── */
+  --panel-bg-dark: linear-gradient(145deg,
+    #1a1210 0%, #2e221c 10%, #5c4538 22%, #2a1c16 36%,
+    #1e1410 50%, #3a2b22 64%, #523e32 76%, #2a1c16 88%, #1a1210 100%);
+
+  /* ── Hero image-blend gradients ── */
+  --hero-overlay-mobile: linear-gradient(to bottom, rgba(247,242,236,0.10) 0%, rgba(247,242,236,0.42) 38%, rgba(247,242,236,0.86) 68%, #F7F2EC 92%);
+  --hero-blend-left:     linear-gradient(to right, #F7F2EC 0%, rgba(247,242,236,0.68) 22%, rgba(247,242,236,0.22) 50%, transparent 72%);
+  --hero-blend-bottom:   linear-gradient(to top, #F7F2EC 0%, transparent 100%);
+  --hero-blend-vignette: radial-gradient(ellipse at 82% 50%, transparent 52%, rgba(247,242,236,0.42) 100%);
+
+  /* ── CTA section ── */
+  --cta-bg:           linear-gradient(160deg, #F7F2EC 0%, #EDD5C8 40%, #E5D2C6 70%, #F7F2EC 100%);
+  --cta-ghost-border: rgba(122, 47, 75, 0.35);
+  --cta-ghost-text:   #7A2F4B;
 
   /* ── Legacy aliases (keep existing components working) ── */
   --color-bg-page:          var(--color-bg);
@@ -102,6 +123,17 @@
     --gradient-accent:    linear-gradient(160deg, #4A1F2B, #6E3947);
     --gradient-metallic:  linear-gradient(90deg, #B88D47 30%, #E0C97A 50%, #B88D47 70%);
 
+    /* ── Hero image-blend gradients ── */
+    --hero-overlay-mobile: linear-gradient(to bottom, rgba(46,29,27,0.18) 0%, rgba(46,29,27,0.42) 38%, rgba(46,29,27,0.84) 68%, #2E1D1B 92%);
+    --hero-blend-left:     linear-gradient(to right, #2E1D1B 0%, rgba(46,29,27,0.68) 22%, rgba(46,29,27,0.22) 50%, transparent 72%);
+    --hero-blend-bottom:   linear-gradient(to top, #2E1D1B 0%, transparent 100%);
+    --hero-blend-vignette: radial-gradient(ellipse at 82% 50%, transparent 52%, rgba(46,29,27,0.42) 100%);
+
+    /* ── CTA section ── */
+    --cta-bg:           linear-gradient(160deg, #1a0f0d 0%, #2E1D1B 40%, #3d2218 70%, #1a0f0d 100%);
+    --cta-ghost-border: rgba(244, 236, 229, 0.25);
+    --cta-ghost-text:   rgba(244, 236, 229, 0.75);
+
     /* ── Legacy aliases ── */
     --color-bg-page:          var(--color-bg);
     --color-bg-surface:       var(--color-surface);
@@ -141,6 +173,13 @@
   --color-text-primary: var(--color-text); --color-text-secondary: var(--color-text-sub);
   --color-accent-primary: var(--color-primary); --color-accent-gold: var(--color-gold);
   --loader-orb-a: rgba(122,47,75,0.45); --loader-orb-b: rgba(74,31,43,0.55);
+  --hero-overlay-mobile: linear-gradient(to bottom, rgba(46,29,27,0.18) 0%, rgba(46,29,27,0.42) 38%, rgba(46,29,27,0.84) 68%, #2E1D1B 92%);
+  --hero-blend-left:     linear-gradient(to right, #2E1D1B 0%, rgba(46,29,27,0.68) 22%, rgba(46,29,27,0.22) 50%, transparent 72%);
+  --hero-blend-bottom:   linear-gradient(to top, #2E1D1B 0%, transparent 100%);
+  --hero-blend-vignette: radial-gradient(ellipse at 82% 50%, transparent 52%, rgba(46,29,27,0.42) 100%);
+  --cta-bg:           linear-gradient(160deg, #1a0f0d 0%, #2E1D1B 40%, #3d2218 70%, #1a0f0d 100%);
+  --cta-ghost-border: rgba(244, 236, 229, 0.25);
+  --cta-ghost-text:   rgba(244, 236, 229, 0.75);
 }
 
 [data-theme="light"] {
@@ -153,6 +192,13 @@
   --color-border-subtle: var(--color-border); --color-border-medium: #D7B2A5;
   --color-text-primary: var(--color-text); --color-text-secondary: var(--color-text-sub);
   --color-accent-primary: var(--color-primary); --color-accent-gold: var(--color-gold);
+  --hero-overlay-mobile: linear-gradient(to bottom, rgba(247,242,236,0.10) 0%, rgba(247,242,236,0.42) 38%, rgba(247,242,236,0.86) 68%, #F7F2EC 92%);
+  --hero-blend-left:     linear-gradient(to right, #F7F2EC 0%, rgba(247,242,236,0.68) 22%, rgba(247,242,236,0.22) 50%, transparent 72%);
+  --hero-blend-bottom:   linear-gradient(to top, #F7F2EC 0%, transparent 100%);
+  --hero-blend-vignette: radial-gradient(ellipse at 82% 50%, transparent 52%, rgba(247,242,236,0.42) 100%);
+  --cta-bg:           linear-gradient(160deg, #F7F2EC 0%, #EDD5C8 40%, #E5D2C6 70%, #F7F2EC 100%);
+  --cta-ghost-border: rgba(122, 47, 75, 0.35);
+  --cta-ghost-text:   #7A2F4B;
 }
 
 /* ─── Base Styles ───────────────────────────────────────────── */
@@ -284,11 +330,11 @@
 .gold-shimmer {
   background: linear-gradient(
     90deg,
-    #D7B2A5 20%,
-    #F4ECE5 45%,
-    #EDD5C8 50%,
-    #F4ECE5 55%,
-    #D7B2A5 80%
+    #B88D47 15%,
+    #C3A05B 30%,
+    #F0D890 50%,
+    #C3A05B 70%,
+    #B88D47 85%
   );
   background-size: 300% auto;
   -webkit-background-clip: text;
@@ -458,9 +504,10 @@
 
 /* ─── Utilities ────────────────────────────────────────────── */
 @layer utilities {
-  .font-display  { font-family: var(--font-display), Georgia, serif; }
-  .font-ui       { font-family: var(--font-ui), sans-serif; }
-  .font-body-txt { font-family: var(--font-body), sans-serif; }
+  .font-display   { font-family: var(--font-display), Georgia, serif; }
+  .font-ui        { font-family: var(--font-ui), sans-serif; }
+  .font-body-txt  { font-family: var(--font-body), sans-serif; }
+  .font-signature { font-family: var(--font-signature), cursive; }
 
   .text-display {
     font-size: clamp(40px, 6vw, 72px);
@@ -520,4 +567,72 @@
       padding-right: 64px;
     }
   }
+}
+
+/* ─── Brand Effects (Brand Effects Guide) ──────────────────────── */
+
+/* 1. Primary Gradient — hero moments, campaign graphics, premium highlights */
+.brand-gradient-bg {
+  background: var(--gradient-primary);
+}
+
+/* Primary gradient on text */
+.brand-gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 2. Accent Gradient — subtle backgrounds, soft overlays */
+.brand-accent-bg {
+  background: var(--gradient-accent);
+}
+
+/* 3. Metallic Accent — foil details, dividers, icons, premium emphasis */
+.brand-metallic-text {
+  background: var(--gradient-metallic);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer-sweep 8s linear infinite;
+}
+
+.brand-metallic-bg {
+  background: var(--gradient-metallic);
+  background-size: 300% auto;
+  animation: shimmer-sweep 8s linear infinite;
+}
+
+/* 6. Texture & Finish — Soft Gradient surface */
+.brand-surface-soft {
+  background: var(--gradient-accent);
+  border: 0.5px solid var(--color-border);
+}
+
+/* Matte Flat — clean minimal surface */
+.brand-surface-matte {
+  background: var(--color-surface);
+  border: 0.5px solid var(--color-border);
+}
+
+/* Metallic Glow — warm gold surface for luxury emphasis */
+.brand-surface-metallic {
+  background: linear-gradient(135deg, var(--color-gold) 0%, #F0D890 50%, var(--color-gold) 100%);
+}
+
+/* 5. Overlay helpers — add depth, soften imagery */
+.brand-overlay-20::after  { content: ''; position: absolute; inset: 0; background: var(--overlay-light);  pointer-events: none; }
+.brand-overlay-50::after  { content: ''; position: absolute; inset: 0; background: var(--overlay-mid);    pointer-events: none; }
+.brand-overlay-80::after  { content: ''; position: absolute; inset: 0; background: var(--overlay-heavy);  pointer-events: none; }
+
+/* Divider with gold metallic shimmer */
+.brand-divider {
+  height: 0.5px;
+  background: var(--gradient-metallic);
+  background-size: 300% auto;
+  animation: shimmer-sweep 8s linear infinite;
+  border: none;
+  opacity: 0.6;
 }

@@ -32,7 +32,7 @@ export function FeatureStrip() {
   return (
     <section
       aria-label="Features"
-      style={{ background: '#2E1D1B', borderTop: '1px solid rgba(195, 160, 91, 0.2)' }}
+      style={{ background: 'var(--color-bg)', borderTop: '1px solid rgba(195, 160, 91, 0.2)' }}
       className="py-12 md:py-16"
     >
       <div className="max-w-[1440px] mx-auto px-4 md:px-6 lg:px-0">
@@ -50,7 +50,7 @@ export function FeatureStrip() {
               >
                 <BorderGlow
                   borderRadius={4}
-                  backgroundColor="#3A1C28"
+                  backgroundColor="var(--color-surface)"
                   glowColor="38 45 55"
                   colors={['#7A2F4B', '#C3A05B', '#E8B8AA']}
                   glowIntensity={0.85}
@@ -73,7 +73,7 @@ export function FeatureStrip() {
                     <Icon
                       size={80}
                       strokeWidth={1.0}
-                      style={{ color: i % 2 === 0 ? '#C3A05B' : '#E8B8AA' }}
+                      style={{ color: i % 2 === 0 ? 'var(--color-gold)' : 'var(--color-primary)' }}
                       aria-hidden="true"
                     />
                     <span
@@ -82,7 +82,7 @@ export function FeatureStrip() {
                         fontSize: '10px',
                         letterSpacing: '0.16em',
                         textTransform: 'uppercase',
-                        color: '#F4ECE5',
+                        color: 'var(--color-text)',
                         fontWeight: 600,
                       }}
                     >

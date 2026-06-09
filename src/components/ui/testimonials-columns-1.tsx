@@ -33,8 +33,8 @@ export const TestimonialsColumn = (props: {
                 key={i}
                 style={{
                   padding: "28px 24px",
-                  border: "0.5px solid rgba(46,29,27,0.14)",
-                  background: "#FAF6F1",
+                  border: "0.5px solid color-mix(in srgb, var(--color-midnight) 14%, transparent)",
+                  background: "var(--color-bg)",
                   maxWidth: "300px",
                   width: "100%",
                 }}
@@ -46,7 +46,7 @@ export const TestimonialsColumn = (props: {
                     fontStyle: "italic",
                     fontWeight: 300,
                     lineHeight: 1.7,
-                    color: "#2E1D1B",
+                    color: "var(--color-text)",
                     margin: 0,
                   }}
                 >
@@ -60,7 +60,7 @@ export const TestimonialsColumn = (props: {
                     gap: "10px",
                     marginTop: "20px",
                     paddingTop: "16px",
-                    borderTop: "0.5px solid rgba(46,29,27,0.10)",
+                    borderTop: "0.5px solid color-mix(in srgb, var(--color-midnight) 10%, transparent)",
                   }}
                 >
                   <img
@@ -84,7 +84,7 @@ export const TestimonialsColumn = (props: {
                         fontWeight: 600,
                         letterSpacing: "0.14em",
                         textTransform: "uppercase",
-                        color: "#2E1D1B",
+                        color: "var(--color-text)",
                         lineHeight: 1.4,
                       }}
                     >
@@ -95,7 +95,7 @@ export const TestimonialsColumn = (props: {
                         fontFamily: "var(--font-ui)",
                         fontSize: "8px",
                         letterSpacing: "0.08em",
-                        color: "rgba(46,29,27,0.55)",
+                        color: "color-mix(in srgb, var(--color-midnight) 55%, transparent)",
                         lineHeight: 1.4,
                         marginTop: "2px",
                       }}

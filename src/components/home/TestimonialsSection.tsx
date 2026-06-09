@@ -115,7 +115,7 @@ export function TestimonialsSection() {
               textWrap: 'balance',
             } as React.CSSProperties}
           >
-            From Lagos to Enugu,{' '}
+            From Lagos to London,{' '}
             <em style={{ fontStyle: 'italic', color: '#7A2F4B' }}>
               the same experience.
             </em>

@@ -24,7 +24,7 @@ export const AuthField = forwardRef<HTMLInputElement, AuthFieldProps>(
             fontSize: '9px',
             letterSpacing: '0.14em',
             textTransform: 'uppercase' as const,
-            color: error ? '#e57373' : '#B9939D',
+            color: error ? 'var(--color-error)' : 'var(--color-text-sub)',
             marginBottom: '8px',
           }}
         >
@@ -40,7 +40,7 @@ export const AuthField = forwardRef<HTMLInputElement, AuthFieldProps>(
             style={{
               width: '100%',
               background: 'transparent',
-              border: `1px solid ${error ? '#e57373' : focused ? '#C3A05B' : 'var(--color-border)'}`,
+              border: `1px solid ${error ? 'var(--color-error)' : focused ? 'var(--color-gold)' : 'var(--color-border)'}`,
               borderRadius: '8px',
               padding: suffix ? '13px 44px 13px 16px' : '13px 16px',
               fontFamily: 'var(--font-body)',
@@ -73,7 +73,7 @@ export const AuthField = forwardRef<HTMLInputElement, AuthFieldProps>(
             style={{
               fontFamily: 'var(--font-body)',
               fontSize: '12px',
-              color: error ? '#e57373' : 'var(--color-text-muted)',
+              color: error ? 'var(--color-error)' : 'var(--color-text-muted)',
               marginTop: '6px',
               lineHeight: 1.4,
             }}

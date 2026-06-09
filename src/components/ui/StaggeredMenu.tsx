@@ -33,13 +33,14 @@ interface StaggeredMenuProps {
   isFixed?: boolean
   closeOnClickAway?: boolean
   headerActions?: ReactNode
+  topOffset?: number
   onMenuOpen?: () => void
   onMenuClose?: () => void
 }
 
 export function StaggeredMenu({
   position = 'right',
-  colors = ['#7A2F4B', '#4A1E30'],
+  colors = ['var(--color-primary)', 'var(--color-primary)'],
   items = [],
   socialItems = [],
   displaySocials = false,
@@ -47,13 +48,14 @@ export function StaggeredMenu({
   className,
   logoNode,
   logoUrl,
-  menuButtonColor = '#F4ECE5',
-  openMenuButtonColor = '#F4ECE5',
-  accentColor = '#C3A05B',
+  menuButtonColor = 'var(--color-on-dark)',
+  openMenuButtonColor = 'var(--color-on-dark)',
+  accentColor = 'var(--color-gold)',
   changeMenuColorOnOpen = true,
   isFixed = false,
   closeOnClickAway = true,
   headerActions,
+  topOffset = 0,
   onMenuOpen,
   onMenuClose,
 }: StaggeredMenuProps) {
@@ -279,7 +281,7 @@ export function StaggeredMenu({
   }, [closeOnClickAway, open, closeMenu])
 
   const prelayerColors = (() => {
-    const raw = colors.length ? colors.slice(0, 4) : ['#2E1D1B', '#3A1C28']
+    const raw = colors.length ? colors.slice(0, 4) : ['var(--color-midnight)', '#3A1C28']
     const arr = [...raw]
     if (arr.length >= 3) arr.splice(Math.floor(arr.length / 2), 1)
     return arr
@@ -288,7 +290,11 @@ export function StaggeredMenu({
   return (
     <div
       className={`staggered-menu-wrapper${isFixed ? ' fixed-wrapper' : ''}${className ? ' ' + className : ''}`}
-      style={accentColor ? { '--sm-accent': accentColor } as React.CSSProperties : undefined}
+      style={{
+        ...(accentColor ? { '--sm-accent': accentColor } : {}),
+        ...(isFixed && topOffset ? { top: topOffset, height: `calc(100vh - ${topOffset}px)` } : {}),
+        transition: isFixed ? 'top 280ms ease' : undefined,
+      } as React.CSSProperties}
       data-position={position}
       data-open={open || undefined}
     >

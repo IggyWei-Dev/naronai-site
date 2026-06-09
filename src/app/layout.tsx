@@ -1,8 +1,12 @@
 import type { Metadata } from 'next'
-import { Cormorant_Garamond, Montserrat, Inter } from 'next/font/google'
+import { Cormorant_Garamond, DM_Sans } from 'next/font/google'
+import localFont from 'next/font/local'
 import '@/styles/globals.css'
 import { NavigationLoader } from '@/components/layout/NavigationLoader'
 
+/* ── 01 Primary Display — Canela stand-in ─────────────────────────
+   Cormorant Garamond: elegant transitional serif, closest free match
+   to Canela (Commercial Type). Swap src when licensed files arrive.  */
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
   weight: ['300', '400', '500'],
@@ -11,17 +15,27 @@ const cormorant = Cormorant_Garamond({
   display: 'swap',
 })
 
-const montserrat = Montserrat({
+/* ── 02 Body — Avenir Next Regular stand-in ───────────────────────
+   DM Sans: geometric humanist sans, proportions closest to Avenir Next */
+const dmSansBody = DM_Sans({
   subsets: ['latin'],
   weight: ['400', '500'],
+  variable: '--font-body',
+  display: 'swap',
+})
+
+/* ── 03 Navigation & UI — Avenir Next Medium stand-in ────────────── */
+const dmSansUI = DM_Sans({
+  subsets: ['latin'],
+  weight: ['500', '600'],
   variable: '--font-ui',
   display: 'swap',
 })
 
-const inter = Inter({
-  subsets: ['latin'],
-  weight: ['400', '500'],
-  variable: '--font-body',
+/* ── 04 Signature Script — Brittany Signature stand-in ───────────── */
+const satisfy = localFont({
+  src: '../../public/Satisfy-Regular.ttf',
+  variable: '--font-signature',
   display: 'swap',
 })
 
@@ -43,7 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${cormorant.variable} ${montserrat.variable} ${inter.variable}`}
+      className={`${cormorant.variable} ${dmSansBody.variable} ${dmSansUI.variable} ${satisfy.variable}`}
     >
       <head>
         <meta name="color-scheme" content="light dark" />
