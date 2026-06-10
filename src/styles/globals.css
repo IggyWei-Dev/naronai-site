@@ -222,6 +222,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color-scheme: light dark;
+    overflow-x: clip; /* clip, not hidden — keeps sticky/fixed elements working */
   }
 
   body {
@@ -230,6 +231,7 @@
     font-family: var(--font-body), sans-serif;
     font-size: 15px;
     line-height: 1.8;
+    overflow-x: clip;
   }
 
   h1, h2, h3, h4, h5, h6 {
