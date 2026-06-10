@@ -30,6 +30,7 @@ export type Database = {
           images:      string[]
           tier:        'Signature' | 'Couture' | 'Bespoke' | null
           in_stock:    boolean
+          stock_count: number
           is_new:      boolean
           hair_type:   string | null
           length:      string | null
@@ -50,6 +51,7 @@ export type Database = {
           images?:     string[]
           tier?:       'Signature' | 'Couture' | 'Bespoke' | null
           in_stock?:   boolean
+          stock_count?: number
           is_new?:     boolean
           hair_type?:  string | null
           length?:     string | null
@@ -70,6 +72,7 @@ export type Database = {
           images?:     string[]
           tier?:       'Signature' | 'Couture' | 'Bespoke' | null
           in_stock?:   boolean
+          stock_count?: number
           is_new?:     boolean
           hair_type?:  string | null
           length?:     string | null
@@ -209,6 +212,10 @@ export type Database = {
       is_admin: {
         Args:    Record<string, never>
         Returns: boolean
+      }
+      decrement_stock: {
+        Args:    { p_id: string; p_qty?: number }
+        Returns: { success: boolean; remaining: number }
       }
     }
   }

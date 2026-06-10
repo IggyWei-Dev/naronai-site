@@ -44,9 +44,10 @@ export function ProductForm({ product, role }: Props) {
   const [colors,      setColors]      = useState<ColorVariant[]>(
     Array.isArray(product?.colors) ? (product.colors as ColorVariant[]) : []
   )
-  const [images,   setImages]   = useState<string[]>(product?.images  ?? [])
-  const [inStock,  setInStock]  = useState(product?.in_stock ?? true)
-  const [isNew,    setIsNew]    = useState(product?.is_new   ?? false)
+  const [images,      setImages]      = useState<string[]>(product?.images      ?? [])
+  const [inStock,     setInStock]     = useState(product?.in_stock    ?? true)
+  const [stockCount,  setStockCount]  = useState(product?.stock_count ?? 0)
+  const [isNew,       setIsNew]       = useState(product?.is_new      ?? false)
 
   // Auto-generate slug from name only when creating
   useEffect(() => {
@@ -67,7 +68,7 @@ export function ProductForm({ product, role }: Props) {
     const data: ProductFormData = {
       name, slug, description, tier, category,
       priceNaira, hairType, density, capType, origin,
-      lengths, colors, images, inStock, isNew,
+      lengths, colors, images, inStock, stockCount, isNew,
     }
 
     startTransition(async () => {
@@ -212,11 +213,37 @@ export function ProductForm({ product, role }: Props) {
 
       {/* Flags */}
       <section className="bg-[#1a1a1a] rounded-lg p-6 border border-[#2a2a2a]">
-        <h2 className="text-[#f5f0e8] text-sm font-medium mb-4">Flags</h2>
-        <div className="space-y-3">
+        <h2 className="text-[#f5f0e8] text-sm font-medium mb-4">Stock &amp; Flags</h2>
+        <div className="space-y-4">
+          <div>
+            <label className={labelClass}>Stock count</label>
+            <input
+              type="number"
+              min={0}
+              step={1}
+              value={stockCount}
+              onChange={(e) => {
+                const n = Math.max(0, parseInt(e.target.value) || 0)
+                setStockCount(n)
+                if (n > 0) setInStock(true)
+                if (n === 0) setInStock(false)
+              }}
+              className={fieldClass}
+            />
+            <p className="text-[#8a8070] text-xs mt-1">
+              Automatically marks out-of-stock when it hits 0 at checkout.
+            </p>
+          </div>
           <label className="flex items-center justify-between">
             <span className="text-[#f5f0e8] text-sm">In stock</span>
-            <Switch checked={inStock} onCheckedChange={setInStock} className="data-[state=checked]:bg-[#c9a96e]" />
+            <Switch
+              checked={inStock}
+              onCheckedChange={(v) => {
+                setInStock(v)
+                if (!v) setStockCount(0)
+              }}
+              className="data-[state=checked]:bg-[#c9a96e]"
+            />
           </label>
           <label className="flex items-center justify-between">
             <span className="text-[#f5f0e8] text-sm">New arrival</span>

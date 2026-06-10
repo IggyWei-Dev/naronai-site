@@ -23,19 +23,27 @@ export function ProductsTable({ products }: { products: ProductRow[] }) {
   const [, startTransition] = useTransition()
   const [filterTier,  setFilterTier]  = useState<string>('all')
   const [filterStock, setFilterStock] = useState<string>('all')
+  const [stockOverrides, setStockOverrides] = useState<Record<string, boolean>>({})
+
+  function getStock(p: ProductRow) {
+    return p.id in stockOverrides ? stockOverrides[p.id] : p.in_stock
+  }
 
   const filtered = products.filter((p) => {
     const tierOk  = filterTier  === 'all' || p.tier === filterTier
-    const stockOk = filterStock === 'all' || (filterStock === 'in' ? p.in_stock : !p.in_stock)
+    const stockOk = filterStock === 'all' || (filterStock === 'in' ? getStock(p) : !getStock(p))
     return tierOk && stockOk
   })
 
   function handleToggleStock(id: string, current: boolean) {
+    const next = !current
+    setStockOverrides((prev) => ({ ...prev, [id]: next }))
     startTransition(async () => {
       try {
-        await toggleProductStock(id, !current)
+        await toggleProductStock(id, next)
         router.refresh()
       } catch {
+        setStockOverrides((prev) => ({ ...prev, [id]: current }))
         toast.error('Failed to update stock')
       }
     })
@@ -84,6 +92,7 @@ export function ProductsTable({ products }: { products: ProductRow[] }) {
               <th className="text-left py-2 pr-4 font-normal">Tier</th>
               <th className="text-left py-2 pr-4 font-normal">Category</th>
               <th className="text-right py-2 pr-4 font-normal">Price</th>
+              <th className="text-center py-2 pr-4 font-normal">Stock</th>
               <th className="text-center py-2 font-normal">In Stock</th>
             </tr>
           </thead>
@@ -138,10 +147,18 @@ export function ProductsTable({ products }: { products: ProductRow[] }) {
                 >
                   {formatNaira(product.price / 100)}
                 </td>
+                <td
+                  className="py-3 pr-4 text-center cursor-pointer"
+                  onClick={() => router.push(`/admin/products/${product.id}`)}
+                >
+                  <span className={`text-sm font-medium ${product.stock_count === 0 ? 'text-[#8a8070]' : 'text-[#f5f0e8]'}`}>
+                    {product.stock_count}
+                  </span>
+                </td>
                 <td className="py-3 text-center" onClick={(e) => e.stopPropagation()}>
                   <Switch
-                    checked={product.in_stock}
-                    onCheckedChange={() => handleToggleStock(product.id, product.in_stock)}
+                    checked={getStock(product)}
+                    onCheckedChange={() => handleToggleStock(product.id, getStock(product))}
                     className="data-[state=checked]:bg-[#c9a96e]"
                   />
                 </td>

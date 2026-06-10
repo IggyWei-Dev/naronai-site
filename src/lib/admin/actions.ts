@@ -46,6 +46,7 @@ export interface ProductFormData {
   colors:      { name: string; hex: string; image?: string }[]
   images:      string[]
   inStock:     boolean
+  stockCount:  number
   isNew:       boolean
 }
 
@@ -66,6 +67,7 @@ export async function createProduct(data: ProductFormData) {
     colors:      data.colors,
     images:      data.images,
     in_stock:    data.inStock,
+    stock_count: data.stockCount,
     is_new:      data.isNew,
   })
 
@@ -90,6 +92,7 @@ export async function updateProduct(id: string, data: ProductFormData) {
     colors:      data.colors,
     images:      data.images,
     in_stock:    data.inStock,
+    stock_count: data.stockCount,
     is_new:      data.isNew,
   }).eq('id', id)
 
@@ -114,4 +117,19 @@ export async function deleteProduct(id: string) {
   const { error } = await supabase.from('products').delete().eq('id', id)
   if (error) throw new Error(error.message)
   revalidatePath('/admin/products')
+}
+
+// ── Checkout stock decrement ──────────────────────────────
+// Atomic: Postgres serialises concurrent UPDATEs so two buyers
+// racing for the last unit both hit the WHERE guard; only one wins.
+// Returns { success: false } if out of stock — caller must abort checkout.
+export async function decrementStock(
+  productId: string,
+  qty: number = 1,
+): Promise<{ success: boolean; remaining: number }> {
+  const supabase = createClient()
+  const { data, error } = await supabase
+    .rpc('decrement_stock', { p_id: productId, p_qty: qty })
+  if (error) throw new Error(error.message)
+  return data as { success: boolean; remaining: number }
 }

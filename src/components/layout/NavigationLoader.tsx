@@ -28,6 +28,7 @@ export function NavigationLoader() {
       const dest = href.split('?')[0].split('#')[0]
       const curr = pathname.split('?')[0]
       if (dest === curr) return
+      if (dest.startsWith('/admin') || curr.startsWith('/admin')) return
 
       // Cancel any in-flight hide timer (user navigated again mid-load)
       if (hideTimerRef.current) clearTimeout(hideTimerRef.current)

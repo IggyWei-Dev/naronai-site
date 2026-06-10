@@ -48,6 +48,7 @@ create table products (
   images      text[] default '{}',
   tier        text check (tier in ('Signature','Couture','Bespoke')),
   in_stock    boolean default true,
+  stock_count integer not null default 0,
   is_new      boolean default false,
   hair_type   text,
   length      text,
@@ -200,6 +201,42 @@ create policy "newsletter_admin_all"
   to authenticated
   using (is_admin())
   with check (is_admin());
+
+-- ── Stock management ─────────────────────────────────────
+-- Migration: run this if products table already exists
+-- alter table products add column if not exists stock_count integer not null default 0;
+
+-- Atomic decrement that auto-flips in_stock=false when count hits 0.
+-- A single UPDATE is serialised by Postgres, so two concurrent calls
+-- racing for the last unit both hit the WHERE check; only one wins.
+create or replace function public.decrement_stock(p_id uuid, p_qty integer default 1)
+returns jsonb
+language plpgsql
+security definer
+set search_path = ''
+as $$
+declare
+  result jsonb;
+begin
+  update public.products
+  set
+    stock_count = stock_count - p_qty,
+    in_stock    = (stock_count - p_qty > 0)
+  where id = p_id
+    and in_stock    = true
+    and stock_count >= p_qty
+  returning jsonb_build_object(
+    'success',   true,
+    'remaining', stock_count
+  ) into result;
+
+  if result is null then
+    result := jsonb_build_object('success', false, 'remaining', 0);
+  end if;
+
+  return result;
+end;
+$$;
 
 -- ── Indexes ───────────────────────────────────────────────
 create index idx_products_slug       on products(slug);
