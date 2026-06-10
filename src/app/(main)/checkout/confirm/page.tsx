@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useSearchParams }      from 'next/navigation'
 import Link                     from 'next/link'
 import { CheckCircle, XCircle } from 'lucide-react'
-import { Button }               from '@/components/ui/Button'
+import { Button }               from '@/components/ui/button'
 import { useCartStore }         from '@/lib/store/cartStore'
 
 export default function CheckoutConfirmPage() {
@@ -73,7 +73,7 @@ export default function CheckoutConfirmPage() {
 
   return (
     <div style={{ minHeight: '60vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '24px', padding: '96px 24px', textAlign: 'center' }}>
-      <XCircle size={48} style={{ color: '#e57373' }} />
+      <XCircle size={48} style={{ color: 'var(--color-error)' }} />
       <div>
         <h1 className="text-h1" style={{ marginBottom: '12px' }}>Payment not confirmed</h1>
         <p style={{ fontFamily: 'var(--font-body)', fontSize: '15px', color: 'var(--color-text-secondary)', maxWidth: '440px' }}>

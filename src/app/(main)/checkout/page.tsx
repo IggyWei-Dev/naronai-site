@@ -6,7 +6,7 @@ import { useForm }                        from 'react-hook-form'
 import { zodResolver }                    from '@hookform/resolvers/zod'
 import { z }                             from 'zod'
 import { useCartStore }                  from '@/lib/store/cartStore'
-import { Button }                        from '@/components/ui/Button'
+import { Button }                        from '@/components/ui/button'
 import { FormInput }                     from '@/components/ui/FormInput'
 import { formatNaira }                   from '@/lib/utils'
 import toast                             from 'react-hot-toast'
@@ -15,25 +15,14 @@ const CARD_WIDTH = 380
 
 const chromeCard: React.CSSProperties = {
   width: CARD_WIDTH,
-  background: `linear-gradient(
-    150deg,
-    #1a1210 0%,
-    #2e221c 10%,
-    #5c4538 22%,
-    #2a1c16 36%,
-    #1e1410 50%,
-    #3a2b22 64%,
-    #523e32 76%,
-    #2a1c16 88%,
-    #1a1210 100%
-  )`,
-  border: '0.5px solid rgba(195,160,91,0.35)',
+  background: `var(--panel-bg-dark)`,
+  border: '0.5px solid color-mix(in srgb, var(--color-gold) 35%, transparent)',
   borderRadius: '16px',
   boxShadow: `
-    inset 0 1px 0 rgba(195,160,91,0.3),
+    inset 0 1px 0 color-mix(in srgb, var(--color-gold) 30%, transparent),
     inset 0 -1px 0 rgba(0,0,0,0.7),
     0 32px 80px rgba(0,0,0,0.55),
-    0 4px 20px rgba(195,160,91,0.08)
+    0 4px 20px color-mix(in srgb, var(--color-gold) 8%, transparent)
   `,
   padding: '32px',
   position: 'relative',
@@ -203,7 +192,7 @@ export default function CheckoutPage() {
               left: '-60%',
               width: '40%',
               height: '100%',
-              background: 'linear-gradient(105deg, transparent 0%, rgba(195,160,91,0.08) 50%, transparent 100%)',
+              background: 'linear-gradient(105deg, transparent 0%, color-mix(in srgb, var(--color-gold) 8%, transparent) 50%, transparent 100%)',
               pointerEvents: 'none',
               animation: 'chrome-sheen 7s ease-in-out infinite',
             }} />
@@ -213,7 +202,7 @@ export default function CheckoutPage() {
               fontSize: '20px',
               fontWeight: 300,
               fontStyle: 'italic',
-              color: '#F4ECE5',
+              color: 'var(--color-on-dark)',
               margin: '0 0 20px',
             }}>
               Order summary
@@ -223,30 +212,30 @@ export default function CheckoutPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '20px' }}>
               {items.map((item) => (
                 <div key={`${item.product.id}-${item.selectedColor}`} style={{ display: 'flex', justifyContent: 'space-between', gap: '12px' }}>
-                  <span style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'rgba(244,236,229,0.6)', flex: 1 }}>
+                  <span style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'color-mix(in srgb, var(--color-on-dark) 60%, transparent)', flex: 1 }}>
                     {item.product.name} ×{item.quantity}
                   </span>
-                  <span style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'rgba(244,236,229,0.75)', whiteSpace: 'nowrap' }}>
+                  <span style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'color-mix(in srgb, var(--color-on-dark) 75%, transparent)', whiteSpace: 'nowrap' }}>
                     {formatNaira(item.product.price * item.quantity)}
                   </span>
                 </div>
               ))}
             </div>
 
-            <div style={{ height: '0.5px', background: 'rgba(195,160,91,0.2)', marginBottom: '16px' }} />
+            <div style={{ height: '0.5px', background: 'color-mix(in srgb, var(--color-gold) 20%, transparent)', marginBottom: '16px' }} />
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '20px' }}>
               <ChromeRow label="Subtotal" value={formatNaira(subtotal)} />
               <ChromeRow label="Shipping" value={shippingFee === 0 ? 'Free' : formatNaira(shippingFee)} />
             </div>
 
-            <div style={{ height: '0.5px', background: 'rgba(195,160,91,0.25)', marginBottom: '20px' }} />
+            <div style={{ height: '0.5px', background: 'color-mix(in srgb, var(--color-gold) 25%, transparent)', marginBottom: '20px' }} />
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-              <span style={{ fontFamily: 'var(--font-ui)', fontSize: '8px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(244,236,229,0.4)' }}>
+              <span style={{ fontFamily: 'var(--font-ui)', fontSize: '8px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'color-mix(in srgb, var(--color-on-dark) 40%, transparent)' }}>
                 Total
               </span>
-              <span style={{ fontFamily: 'var(--font-display)', fontSize: '26px', fontWeight: 300, color: '#C3A05B', letterSpacing: '-0.01em' }}>
+              <span style={{ fontFamily: 'var(--font-display)', fontSize: '26px', fontWeight: 300, color: 'var(--color-gold)', letterSpacing: '-0.01em' }}>
                 {formatNaira(orderTotal)}
               </span>
             </div>
@@ -290,8 +279,8 @@ export default function CheckoutPage() {
 function ChromeRow({ label, value }: { label: string; value: string }) {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-      <span style={{ fontFamily: 'var(--font-ui)', fontSize: '9px', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(244,236,229,0.4)' }}>{label}</span>
-      <span style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'rgba(244,236,229,0.75)' }}>{value}</span>
+      <span style={{ fontFamily: 'var(--font-ui)', fontSize: '9px', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'color-mix(in srgb, var(--color-on-dark) 40%, transparent)' }}>{label}</span>
+      <span style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'color-mix(in srgb, var(--color-on-dark) 75%, transparent)' }}>{value}</span>
     </div>
   )
 }

@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Trash2, Minus, Plus } from 'lucide-react'
 import { useCartStore }        from '@/lib/store/cartStore'
-import { Button }              from '@/components/ui/Button'
+import { Button }              from '@/components/ui/button'
 import { SectionDivider }      from '@/components/ui/SectionDivider'
 import { formatNaira }         from '@/lib/utils'
 
@@ -13,25 +13,14 @@ const CARD_WIDTH = 380
 /* ── Chrome surface ───────────────────────────────────────── */
 const chromeCard: React.CSSProperties = {
   width: CARD_WIDTH,
-  background: `linear-gradient(
-    150deg,
-    #1a1210 0%,
-    #2e221c 10%,
-    #5c4538 22%,
-    #2a1c16 36%,
-    #1e1410 50%,
-    #3a2b22 64%,
-    #523e32 76%,
-    #2a1c16 88%,
-    #1a1210 100%
-  )`,
-  border: '0.5px solid rgba(195,160,91,0.35)',
+  background: `var(--panel-bg-dark)`,
+  border: '0.5px solid color-mix(in srgb, var(--color-gold) 35%, transparent)',
   borderRadius: '16px',
   boxShadow: `
-    inset 0 1px 0 rgba(195,160,91,0.3),
+    inset 0 1px 0 color-mix(in srgb, var(--color-gold) 30%, transparent),
     inset 0 -1px 0 rgba(0,0,0,0.7),
     0 32px 80px rgba(0,0,0,0.55),
-    0 4px 20px rgba(195,160,91,0.08)
+    0 4px 20px color-mix(in srgb, var(--color-gold) 8%, transparent)
   `,
   padding: '32px',
   position: 'relative',
@@ -174,7 +163,7 @@ export default function CartPage() {
             left: '-60%',
             width: '40%',
             height: '100%',
-            background: 'linear-gradient(105deg, transparent 0%, rgba(195,160,91,0.08) 50%, transparent 100%)',
+            background: 'linear-gradient(105deg, transparent 0%, color-mix(in srgb, var(--color-gold) 8%, transparent) 50%, transparent 100%)',
             pointerEvents: 'none',
             animation: 'chrome-sheen 7s ease-in-out infinite',
           }} />
@@ -184,7 +173,7 @@ export default function CartPage() {
             fontSize: '20px',
             fontWeight: 300,
             fontStyle: 'italic',
-            color: '#F4ECE5',
+            color: 'var(--color-on-dark)',
             margin: '0 0 24px',
           }}>
             Order summary
@@ -195,13 +184,13 @@ export default function CartPage() {
             <ChromeRow label="Shipping" value={shippingFee === 0 ? 'Free' : formatNaira(shippingFee)} />
           </div>
 
-          <div style={{ height: '0.5px', background: 'rgba(195,160,91,0.25)', margin: '4px 0 20px' }} />
+          <div style={{ height: '0.5px', background: 'color-mix(in srgb, var(--color-gold) 25%, transparent)', margin: '4px 0 20px' }} />
 
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '28px' }}>
-            <span style={{ fontFamily: 'var(--font-ui)', fontSize: '8px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(244,236,229,0.4)' }}>
+            <span style={{ fontFamily: 'var(--font-ui)', fontSize: '8px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'color-mix(in srgb, var(--color-on-dark) 40%, transparent)' }}>
               Total
             </span>
-            <span style={{ fontFamily: 'var(--font-display)', fontSize: '26px', fontWeight: 300, color: '#C3A05B', letterSpacing: '-0.01em' }}>
+            <span style={{ fontFamily: 'var(--font-display)', fontSize: '26px', fontWeight: 300, color: 'var(--color-gold)', letterSpacing: '-0.01em' }}>
               {formatNaira(orderTotal)}
             </span>
           </div>
@@ -211,8 +200,8 @@ export default function CartPage() {
             style={{
               display: 'block',
               padding: '14px',
-              background: '#7A2F4B',
-              color: '#F4ECE5',
+              background: 'var(--color-primary)',
+              color: 'var(--color-on-dark)',
               borderRadius: '2px',
               fontFamily: 'var(--font-ui)',
               fontSize: '10px',
@@ -225,7 +214,7 @@ export default function CartPage() {
             Proceed to checkout
           </Link>
 
-          <p style={{ fontFamily: 'var(--font-body)', fontSize: '10px', color: 'rgba(244,236,229,0.3)', textAlign: 'center', marginTop: '14px', lineHeight: 1.5 }}>
+          <p style={{ fontFamily: 'var(--font-body)', fontSize: '10px', color: 'color-mix(in srgb, var(--color-on-dark) 30%, transparent)', textAlign: 'center', marginTop: '14px', lineHeight: 1.5 }}>
             Free shipping on orders over ₦150,000
           </p>
         </div>
@@ -249,7 +238,7 @@ export default function CartPage() {
             <span style={{ fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-text-muted)' }}>Total</span>
             <span style={{ fontFamily: 'var(--font-display)', fontSize: '22px', color: 'var(--color-accent-gold)' }}>{formatNaira(orderTotal)}</span>
           </div>
-          <Link href="/checkout" style={{ display: 'block', padding: '14px', background: '#7A2F4B', color: '#F4ECE5', borderRadius: '2px', fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.16em', textTransform: 'uppercase', textDecoration: 'none', textAlign: 'center' }}>
+          <Link href="/checkout" style={{ display: 'block', padding: '14px', background: 'var(--color-primary)', color: 'var(--color-on-dark)', borderRadius: '2px', fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.16em', textTransform: 'uppercase', textDecoration: 'none', textAlign: 'center' }}>
             Proceed to checkout
           </Link>
         </div>
@@ -270,8 +259,8 @@ function Row({ label, value }: { label: string; value: string }) {
 function ChromeRow({ label, value }: { label: string; value: string }) {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-      <span style={{ fontFamily: 'var(--font-ui)', fontSize: '9px', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(244,236,229,0.4)' }}>{label}</span>
-      <span style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'rgba(244,236,229,0.75)' }}>{value}</span>
+      <span style={{ fontFamily: 'var(--font-ui)', fontSize: '9px', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'color-mix(in srgb, var(--color-on-dark) 40%, transparent)' }}>{label}</span>
+      <span style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'color-mix(in srgb, var(--color-on-dark) 75%, transparent)' }}>{value}</span>
     </div>
   )
 }
