@@ -4,6 +4,55 @@ import { formatNaira } from '@/lib/utils'
 
 const FROM = process.env.RESEND_FROM_EMAIL ?? 'orders@naronai.com'
 
+export async function sendOrderStatusUpdate(
+  email: string,
+  orderId: string,
+  newStatus: string,
+) {
+  const resend   = new Resend(process.env.RESEND_API_KEY)
+  const orderRef = `#${orderId.slice(0, 8).toUpperCase()}`
+
+  const statusLabels: Record<string, string> = {
+    processing: 'Your order is being prepared',
+    shipped:    'Your order is on its way',
+    delivered:  'Your order has been delivered',
+    cancelled:  'Your order has been cancelled',
+  }
+
+  const label = statusLabels[newStatus] ?? `Order status updated to ${newStatus}`
+
+  await resend.emails.send({
+    from:    `Naronai <${FROM}>`,
+    to:      email,
+    subject: `${label} — ${orderRef}`,
+    html: `
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;background:#F7F2EC;font-family:'Inter',sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#F7F2EC;padding:40px 20px;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:12px;overflow:hidden;">
+        <tr><td style="background:#2E1D1B;padding:32px;text-align:center;">
+          <p style="margin:0;font-family:'Georgia',serif;font-size:22px;letter-spacing:0.25em;text-transform:uppercase;color:#F4ECE5;font-weight:300;">NARONAI</p>
+        </td></tr>
+        <tr><td style="padding:40px;">
+          <p style="margin:0 0 8px;font-family:'Georgia',serif;font-size:22px;color:#2E1D1B;">${label}</p>
+          <p style="margin:16px 0 0;font-family:'Inter',sans-serif;font-size:14px;color:#5A443F;">Order ${orderRef}</p>
+        </td></tr>
+        <tr><td style="background:#2E1D1B;padding:20px;text-align:center;">
+          <p style="margin:0;font-family:'Montserrat',sans-serif;font-size:10px;color:#8D6E74;letter-spacing:0.1em;">
+            Questions? <a href="mailto:hello@naronai.com" style="color:#C3A05B;">hello@naronai.com</a>
+          </p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`,
+  })
+}
+
 export async function sendOrderConfirmation(order: Order, email: string) {
   const resend = new Resend(process.env.RESEND_API_KEY)
   const itemRows = order.items
