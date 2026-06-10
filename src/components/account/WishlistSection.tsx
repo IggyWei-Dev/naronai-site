@@ -47,13 +47,13 @@ export function WishlistSection({ entries: initialEntries }: WishlistSectionProp
           width: '56px',
           height: '56px',
           borderRadius: '50%',
-          background: 'rgba(195,160,91,0.08)',
-          border: '0.5px solid rgba(195,160,91,0.2)',
+          background: 'color-mix(in srgb, var(--color-gold) 8%, transparent)',
+          border: '0.5px solid color-mix(in srgb, var(--color-gold) 20%, transparent)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           fontSize: '20px',
-          color: 'rgba(195,160,91,0.5)',
+          color: 'color-mix(in srgb, var(--color-gold) 50%, transparent)',
         }}>
           ✦
         </div>
@@ -84,8 +84,8 @@ export function WishlistSection({ entries: initialEntries }: WishlistSectionProp
             display: 'inline-block',
             marginTop: '8px',
             padding: '12px 28px',
-            background: '#7A2F4B',
-            color: '#F4ECE5',
+            background: 'var(--color-primary)',
+            color: 'var(--color-on-dark)',
             borderRadius: '2px',
             fontFamily: 'var(--font-ui)',
             fontSize: '10px',
@@ -132,13 +132,13 @@ export function WishlistSection({ entries: initialEntries }: WishlistSectionProp
                 width: '28px',
                 height: '28px',
                 borderRadius: '50%',
-                background: 'rgba(46,29,27,0.7)',
+                background: 'color-mix(in srgb, var(--color-midnight) 70%, transparent)',
                 border: 'none',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: isRemoving ? 'not-allowed' : 'pointer',
-                color: 'rgba(244,236,229,0.7)',
+                color: 'color-mix(in srgb, var(--color-on-dark) 70%, transparent)',
                 transition: 'background 180ms ease',
               }}
             >
@@ -150,7 +150,7 @@ export function WishlistSection({ entries: initialEntries }: WishlistSectionProp
               <div style={{
                 position: 'relative',
                 paddingTop: '133%',
-                background: 'rgba(195,160,91,0.04)',
+                background: 'color-mix(in srgb, var(--color-gold) 4%, transparent)',
                 overflow: 'hidden',
                 marginBottom: '14px',
               }}>
@@ -169,7 +169,7 @@ export function WishlistSection({ entries: initialEntries }: WishlistSectionProp
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: 'rgba(195,160,91,0.2)',
+                    color: 'color-mix(in srgb, var(--color-gold) 20%, transparent)',
                     fontSize: '28px',
                   }}>
                     ✦
@@ -186,8 +186,8 @@ export function WishlistSection({ entries: initialEntries }: WishlistSectionProp
                     fontSize: '7px',
                     letterSpacing: '0.16em',
                     textTransform: 'uppercase',
-                    color: '#C3A05B',
-                    background: 'rgba(46,29,27,0.75)',
+                    color: 'var(--color-gold)',
+                    background: 'color-mix(in srgb, var(--color-midnight) 75%, transparent)',
                     padding: '4px 8px',
                   }}>
                     {product.tier}

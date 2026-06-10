@@ -34,23 +34,23 @@ function statusLabel(status: OrderStatus): string {
 
 function statusColor(status: OrderStatus): string {
   return {
-    pending:    'rgba(182,158,150,0.18)',
-    paid:       'rgba(195,160,91,0.18)',
-    processing: 'rgba(195,160,91,0.18)',
-    shipped:    'rgba(122,47,75,0.15)',
-    delivered:  'rgba(100,140,100,0.15)',
-    cancelled:  'rgba(229,115,115,0.12)',
+    pending:    'color-mix(in srgb, var(--color-text-muted) 18%, transparent)',
+    paid:       'color-mix(in srgb, var(--color-gold) 18%, transparent)',
+    processing: 'color-mix(in srgb, var(--color-gold) 18%, transparent)',
+    shipped:    'color-mix(in srgb, var(--color-primary) 15%, transparent)',
+    delivered:  'color-mix(in srgb, var(--color-success) 15%, transparent)',
+    cancelled:  'color-mix(in srgb, var(--color-error) 12%, transparent)',
   }[status]
 }
 
 function statusTextColor(status: OrderStatus): string {
   return {
-    pending:    '#B69E96',
-    paid:       '#C3A05B',
-    processing: '#C3A05B',
-    shipped:    '#C39',
-    delivered:  '#7aab7a',
-    cancelled:  '#e57373',
+    pending:    'var(--color-text-muted)',
+    paid:       'var(--color-gold)',
+    processing: 'var(--color-gold)',
+    shipped:    'var(--color-primary)',
+    delivered:  'var(--color-success)',
+    cancelled:  'var(--color-error)',
   }[status]
 }
 
@@ -167,7 +167,7 @@ function OrderRow({ order }: { order: OrderRow }) {
               justifyContent: 'space-between',
               alignItems: 'center',
               padding: '12px 16px',
-              background: 'rgba(195,160,91,0.04)',
+              background: 'color-mix(in srgb, var(--color-gold) 4%, transparent)',
               border: '0.5px solid var(--color-border)',
               borderRadius: '4px',
             }}>
@@ -248,13 +248,13 @@ export function OrdersSection({ orders }: OrdersSectionProps) {
           width: '56px',
           height: '56px',
           borderRadius: '50%',
-          background: 'rgba(195,160,91,0.08)',
-          border: '0.5px solid rgba(195,160,91,0.2)',
+          background: 'color-mix(in srgb, var(--color-gold) 8%, transparent)',
+          border: '0.5px solid color-mix(in srgb, var(--color-gold) 20%, transparent)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           fontSize: '20px',
-          color: 'rgba(195,160,91,0.5)',
+          color: 'color-mix(in srgb, var(--color-gold) 50%, transparent)',
         }}>
           ✦
         </div>
@@ -285,8 +285,8 @@ export function OrdersSection({ orders }: OrdersSectionProps) {
             display: 'inline-block',
             marginTop: '8px',
             padding: '12px 28px',
-            background: '#7A2F4B',
-            color: '#F4ECE5',
+            background: 'var(--color-primary)',
+            color: 'var(--color-on-dark)',
             borderRadius: '2px',
             fontFamily: 'var(--font-ui)',
             fontSize: '10px',

@@ -63,7 +63,7 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const inkColor = theme === 'light' ? 'var(--color-primary)' : 'var(--color-on-dark)'
+  const inkColor = theme === 'light' ? 'var(--color-text)' : 'var(--color-on-dark)'
 
   const navBase: React.CSSProperties = {
     position: 'fixed',
@@ -140,7 +140,7 @@ export function Navbar() {
                 fontSize: '7px',
                 letterSpacing: '0.22em',
                 textTransform: 'uppercase',
-                color: theme === 'light' ? 'color-mix(in srgb, var(--color-primary) 55%, transparent)' : 'color-mix(in srgb, var(--color-on-dark) 50%, transparent)',
+                color: theme === 'light' ? 'var(--color-text-muted)' : 'color-mix(in srgb, var(--color-on-dark) 50%, transparent)',
                 lineHeight: 1,
                 transition: 'color 300ms ease',
               }}>
@@ -193,7 +193,7 @@ export function Navbar() {
               <span style={{ fontFamily: 'var(--font-display)', fontSize: '14px', letterSpacing: '0.3em', textTransform: 'uppercase', color: inkColor, fontWeight: 300, lineHeight: 1 }}>
                 NARONAI
               </span>
-              <span style={{ fontFamily: 'var(--font-ui)', fontSize: '6px', letterSpacing: '0.2em', textTransform: 'uppercase', color: theme === 'light' ? 'color-mix(in srgb, var(--color-primary) 55%, transparent)' : 'color-mix(in srgb, var(--color-on-dark) 50%, transparent)', lineHeight: 1 }}>
+              <span style={{ fontFamily: 'var(--font-ui)', fontSize: '6px', letterSpacing: '0.2em', textTransform: 'uppercase', color: theme === 'light' ? 'var(--color-text-muted)' : 'color-mix(in srgb, var(--color-on-dark) 50%, transparent)', lineHeight: 1 }}>
                 Leave an Impression
               </span>
             </div>

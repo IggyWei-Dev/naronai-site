@@ -23,7 +23,7 @@ export function ProductGallery({ images, name }: ProductGalleryProps) {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        color: 'rgba(195,160,91,0.2)',
+        color: 'color-mix(in srgb, var(--color-gold) 20%, transparent)',
         fontSize: '32px',
       }}>
         ✦

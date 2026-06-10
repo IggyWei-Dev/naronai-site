@@ -64,7 +64,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
           {/* Gradient overlay */}
           <div style={{
             position: 'absolute', inset: 0,
-            background: 'linear-gradient(to top, rgba(46,29,27,0.7) 0%, transparent 50%)',
+            background: 'linear-gradient(to top, color-mix(in srgb, var(--color-midnight) 70%, transparent) 0%, transparent 50%)',
           }} />
 
           {/* Tier badge */}
@@ -78,7 +78,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
           {!product.inStock && (
             <div style={{
               position: 'absolute', inset: 0,
-              background: 'rgba(46,29,27,0.5)',
+              background: 'color-mix(in srgb, var(--color-midnight) 50%, transparent)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
               <Badge variant="sold-out">Sold Out</Badge>
@@ -130,7 +130,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
             height: '28px',
             borderRadius: '50%',
             background: 'var(--color-accent-primary)',
-            color: '#F4ECE5',
+            color: 'var(--color-on-dark)',
             border: 'none',
             cursor: 'pointer',
             display: 'flex',

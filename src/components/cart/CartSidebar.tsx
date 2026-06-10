@@ -50,7 +50,7 @@ export function CartSidebar() {
               position: 'fixed',
               inset: 0,
               zIndex: 200,
-              background: 'rgba(46,29,27,0.55)',
+              background: 'color-mix(in srgb, var(--color-midnight) 55%, transparent)',
               backdropFilter: 'blur(2px)',
               WebkitBackdropFilter: 'blur(2px)',
             }}
@@ -76,7 +76,7 @@ export function CartSidebar() {
               background: 'var(--color-bg)',
               display: 'flex',
               flexDirection: 'column',
-              boxShadow: '-8px 0 32px rgba(46,29,27,0.18)',
+              boxShadow: '-8px 0 32px color-mix(in srgb, var(--color-midnight) 18%, transparent)',
             }}
           >
             {/* Header */}
@@ -143,7 +143,7 @@ export function CartSidebar() {
                   padding: '40px 24px',
                   textAlign: 'center',
                 }}>
-                  <span style={{ fontSize: '24px', color: 'rgba(195,160,91,0.3)' }}>✦</span>
+                  <span style={{ fontSize: '24px', color: 'color-mix(in srgb, var(--color-gold) 30%, transparent)' }}>✦</span>
                   <div>
                     <p style={{
                       fontFamily: 'var(--font-display)',
@@ -170,8 +170,8 @@ export function CartSidebar() {
                     style={{
                       marginTop: '8px',
                       padding: '11px 24px',
-                      background: '#7A2F4B',
-                      color: '#F4ECE5',
+                      background: 'var(--color-primary)',
+                      color: 'var(--color-on-dark)',
                       borderRadius: '2px',
                       fontFamily: 'var(--font-ui)',
                       fontSize: '9px',
@@ -202,7 +202,7 @@ export function CartSidebar() {
                           width: '76px',
                           height: '96px',
                           flexShrink: 0,
-                          background: 'rgba(195,160,91,0.05)',
+                          background: 'color-mix(in srgb, var(--color-gold) 5%, transparent)',
                           overflow: 'hidden',
                           position: 'relative',
                         }}>
@@ -218,7 +218,7 @@ export function CartSidebar() {
                             <div style={{
                               position: 'absolute', inset: 0, display: 'flex',
                               alignItems: 'center', justifyContent: 'center',
-                              color: 'rgba(195,160,91,0.2)', fontSize: '18px',
+                              color: 'color-mix(in srgb, var(--color-gold) 20%, transparent)', fontSize: '18px',
                             }}>✦</div>
                           )}
                         </div>
@@ -367,8 +367,8 @@ export function CartSidebar() {
                     display: 'block',
                     width: '100%',
                     padding: '15px',
-                    background: '#7A2F4B',
-                    color: '#F4ECE5',
+                    background: 'var(--color-primary)',
+                    color: 'var(--color-on-dark)',
                     borderRadius: '2px',
                     fontFamily: 'var(--font-ui)',
                     fontSize: '10px',

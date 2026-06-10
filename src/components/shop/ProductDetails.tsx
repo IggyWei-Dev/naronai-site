@@ -167,7 +167,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                     borderRadius: '20px',
                     border: `0.5px solid ${active ? 'var(--color-accent-primary)' : 'var(--color-border)'}`,
                     background: active ? 'var(--color-accent-primary)' : 'transparent',
-                    color: active ? '#F4ECE5' : 'var(--color-text-muted)',
+                    color: active ? 'var(--color-on-dark)' : 'var(--color-text-muted)',
                     cursor: 'pointer',
                     transition: 'all 150ms ease',
                   }}
@@ -192,8 +192,8 @@ export function ProductDetails({ product }: ProductDetailsProps) {
           style={{
             width: '100%',
             padding: '16px',
-            background: added ? 'transparent' : '#7A2F4B',
-            color: added ? 'var(--color-accent-gold)' : '#F4ECE5',
+            background: added ? 'transparent' : 'var(--color-primary)',
+            color: added ? 'var(--color-accent-gold)' : 'var(--color-on-dark)',
             border: added ? '0.5px solid var(--color-accent-gold)' : 'none',
             borderRadius: '2px',
             fontFamily: 'var(--font-ui)',

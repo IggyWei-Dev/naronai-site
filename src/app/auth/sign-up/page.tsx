@@ -56,8 +56,8 @@ export default function SignUpPage() {
           width: '52px',
           height: '52px',
           borderRadius: '50%',
-          background: 'rgba(195,160,91,0.12)',
-          border: '1px solid rgba(195,160,91,0.3)',
+          background: 'color-mix(in srgb, var(--color-gold) 12%, transparent)',
+          border: '1px solid color-mix(in srgb, var(--color-gold) 30%, transparent)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -149,7 +149,7 @@ export default function SignUpPage() {
             fontSize: '9px',
             letterSpacing: '0.14em',
             textTransform: 'uppercase' as const,
-            color: '#B9939D',
+            color: 'var(--color-text-sub)',
             marginBottom: '8px',
           }}>
             Phone number <span style={{ opacity: 0.6 }}>(optional)</span>
@@ -159,7 +159,7 @@ export default function SignUpPage() {
               display: 'flex',
               alignItems: 'center',
               padding: '13px 12px',
-              background: 'rgba(195,160,91,0.07)',
+              background: 'color-mix(in srgb, var(--color-gold) 7%, transparent)',
               border: '1px solid var(--color-border)',
               borderRight: 'none',
               borderRadius: '8px 0 0 8px',
@@ -235,7 +235,7 @@ export default function SignUpPage() {
           <p role="alert" style={{
             fontFamily: 'var(--font-body)',
             fontSize: '13px',
-            color: '#e57373',
+            color: 'var(--color-error)',
             margin: 0,
           }}>
             {error}
@@ -249,8 +249,8 @@ export default function SignUpPage() {
           style={{
             width: '100%',
             padding: '14px',
-            background: loading ? 'var(--color-border)' : '#7A2F4B',
-            color: '#F4ECE5',
+            background: loading ? 'var(--color-border)' : 'var(--color-primary)',
+            color: 'var(--color-on-dark)',
             border: 'none',
             borderRadius: '2px',
             fontFamily: 'var(--font-ui)',

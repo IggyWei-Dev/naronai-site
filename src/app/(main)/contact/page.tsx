@@ -117,8 +117,8 @@ export default function ContactPage() {
             <div style={{
               marginTop: '48px',
               padding: '24px',
-              background: 'rgba(195,160,91,0.05)',
-              border: '0.5px solid rgba(195,160,91,0.15)',
+              background: 'color-mix(in srgb, var(--color-gold) 5%, transparent)',
+              border: '0.5px solid color-mix(in srgb, var(--color-gold) 15%, transparent)',
               borderRadius: 'var(--radius-md)',
             }}>
               <p style={{
@@ -187,7 +187,7 @@ export default function ContactPage() {
                             borderRadius: '20px',
                             border: `0.5px solid ${active ? 'var(--color-accent-primary)' : 'var(--color-border)'}`,
                             background: active ? 'var(--color-accent-primary)' : 'transparent',
-                            color: active ? '#F4ECE5' : 'var(--color-text-muted)',
+                            color: active ? 'var(--color-on-dark)' : 'var(--color-text-muted)',
                             transition: 'all 150ms ease',
                             userSelect: 'none',
                           }}>
@@ -202,7 +202,7 @@ export default function ContactPage() {
                       initial={{ opacity: 0, y: -4 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.18 }}
-                      style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: '#e57373' }}
+                      style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'var(--color-error)' }}
                     >
                       {errors.reason.message}
                     </motion.span>
@@ -226,8 +226,8 @@ export default function ContactPage() {
                   style={{
                     marginTop: '4px',
                     padding: '16px',
-                    background: loading ? 'var(--color-border)' : '#7A2F4B',
-                    color: '#F4ECE5',
+                    background: loading ? 'var(--color-border)' : 'var(--color-primary)',
+                    color: 'var(--color-on-dark)',
                     border: 'none',
                     borderRadius: '2px',
                     fontFamily: 'var(--font-ui)',
@@ -245,8 +245,8 @@ export default function ContactPage() {
                   {loading && (
                     <span style={{
                       width: '12px', height: '12px',
-                      border: '1.5px solid rgba(244,236,229,0.4)',
-                      borderTopColor: '#F4ECE5',
+                      border: '1.5px solid color-mix(in srgb, var(--color-on-dark) 40%, transparent)',
+                      borderTopColor: 'var(--color-on-dark)',
                       borderRadius: '50%',
                       display: 'inline-block',
                       animation: 'spin 0.8s linear infinite',
@@ -279,8 +279,8 @@ function SuccessState() {
         textAlign: 'center',
         padding: '64px 32px',
         gap: '20px',
-        background: 'rgba(195,160,91,0.04)',
-        border: '0.5px solid rgba(195,160,91,0.15)',
+        background: 'color-mix(in srgb, var(--color-gold) 4%, transparent)',
+        border: '0.5px solid color-mix(in srgb, var(--color-gold) 15%, transparent)',
         borderRadius: 'var(--radius-lg)',
         minHeight: '360px',
       }}

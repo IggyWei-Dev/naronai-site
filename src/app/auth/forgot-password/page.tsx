@@ -41,8 +41,8 @@ export default function ForgotPasswordPage() {
           width: '52px',
           height: '52px',
           borderRadius: '50%',
-          background: 'rgba(195,160,91,0.12)',
-          border: '1px solid rgba(195,160,91,0.3)',
+          background: 'color-mix(in srgb, var(--color-gold) 12%, transparent)',
+          border: '1px solid color-mix(in srgb, var(--color-gold) 30%, transparent)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -129,7 +129,7 @@ export default function ForgotPasswordPage() {
           <p role="alert" style={{
             fontFamily: 'var(--font-body)',
             fontSize: '13px',
-            color: '#e57373',
+            color: 'var(--color-error)',
             margin: 0,
           }}>
             {error}
@@ -142,8 +142,8 @@ export default function ForgotPasswordPage() {
           style={{
             width: '100%',
             padding: '14px',
-            background: loading ? 'var(--color-border)' : '#7A2F4B',
-            color: '#F4ECE5',
+            background: loading ? 'var(--color-border)' : 'var(--color-primary)',
+            color: 'var(--color-on-dark)',
             border: 'none',
             borderRadius: '2px',
             fontFamily: 'var(--font-ui)',

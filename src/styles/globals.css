@@ -8,23 +8,26 @@
 /* ─── Design Tokens — Light Mode ───────────────────────────── */
 /* --font-display / --font-ui / --font-body are injected by next/font in layout.tsx */
 :root {
-  /* ── Canonical tokens (Colors.md) ── */
-  --color-bg:           #F7F2EC;
-  --color-surface:      #E8B8AA;
-  --color-border:       #E5D2C6;
+  /* ── Canonical tokens — Soft Atelier direction ── */
+  --color-bg:           #FAF6F3;   /* pearl white — airier, more dressing-room light */
+  --color-surface:      #F0D8D0;   /* champagne blush — delicate vs prior salmon nude */
+  --color-border:       #E8D2CA;   /* barely-there rosé hairline */
   --color-text:         #2E1D1B;
-  --color-text-sub:     #B9939D;
-  --color-text-muted:   #B69E96;
-  --color-primary:      #7A2F4B;
+  --color-text-sub:     #A67D94;   /* deeper dusty mauve-rose */
+  --color-text-muted:   #B89FA8;   /* softer muted */
+  --color-primary:      #e8b8aa;   /* soft rose-burgundy — serene, not assertive */
   --color-gold:         #C3A05B;
+  --color-petal:        #F8EDE9;   /* ultra-soft blush for section tints */
+  --color-midnight-rose: #1E1118;  /* dark rose-plum for image-grid dark sections */
 
   /* ── Functional / state colors ── */
-  --color-on-dark:      #F4ECE5;   /* always-cream: text on dark or primary surfaces */
+  --color-on-dark:      #F4ECE5;   /* always-cream: text on dark surfaces */
+  --color-on-primary:   var(--color-text); /* dark text on light nude-pink primary */
   --color-error:        #e57373;   /* error / destructive feedback */
   --color-success:      #7aab7a;   /* success / confirmed feedback */
 
   /* ── Brand effects ── */
-  --gradient-primary:   linear-gradient(160deg, #D7B2A5, #7A2F4B);
+  --gradient-primary:   linear-gradient(160deg, #F5E8E4, #e8b8aa);
   --gradient-accent:    linear-gradient(160deg, #F4ECE5, #E5D2C6);
   --gradient-metallic:  linear-gradient(90deg, #C3A05B 30%, #F0D890 50%, #C3A05B 70%);
   --color-midnight:     #2E1D1B;
@@ -38,15 +41,15 @@
     #1e1410 50%, #3a2b22 64%, #523e32 76%, #2a1c16 88%, #1a1210 100%);
 
   /* ── Hero image-blend gradients ── */
-  --hero-overlay-mobile: linear-gradient(to bottom, rgba(247,242,236,0.10) 0%, rgba(247,242,236,0.42) 38%, rgba(247,242,236,0.86) 68%, #F7F2EC 92%);
-  --hero-blend-left:     linear-gradient(to right, #F7F2EC 0%, rgba(247,242,236,0.68) 22%, rgba(247,242,236,0.22) 50%, transparent 72%);
-  --hero-blend-bottom:   linear-gradient(to top, #F7F2EC 0%, transparent 100%);
-  --hero-blend-vignette: radial-gradient(ellipse at 82% 50%, transparent 52%, rgba(247,242,236,0.42) 100%);
+  --hero-overlay-mobile: linear-gradient(to bottom, rgba(250,246,243,0.10) 0%, rgba(250,246,243,0.42) 38%, rgba(250,246,243,0.88) 68%, #FAF6F3 92%);
+  --hero-blend-left:     linear-gradient(to right, #FAF6F3 0%, rgba(250,246,243,0.68) 22%, rgba(250,246,243,0.22) 50%, transparent 72%);
+  --hero-blend-bottom:   linear-gradient(to top, #FAF6F3 0%, transparent 100%);
+  --hero-blend-vignette: radial-gradient(ellipse at 82% 50%, transparent 52%, rgba(250,246,243,0.42) 100%);
 
   /* ── CTA section ── */
-  --cta-bg:           linear-gradient(160deg, #F7F2EC 0%, #EDD5C8 40%, #E5D2C6 70%, #F7F2EC 100%);
-  --cta-ghost-border: rgba(122, 47, 75, 0.35);
-  --cta-ghost-text:   #7A2F4B;
+  --cta-bg:           linear-gradient(160deg, #FAF6F3 0%, #F5E2DF 30%, #EDD4CE 65%, #FAF6F3 100%);
+  --cta-ghost-border: rgba(139, 74, 101, 0.30);
+  --cta-ghost-text:   #8B4A65;
 
   /* ── Legacy aliases (keep existing components working) ── */
   --color-bg-page:          var(--color-bg);
@@ -54,13 +57,13 @@
   --color-bg-card:          #FFFFFF;
   --color-bg-elevated:      var(--color-surface);
   --color-border-subtle:    var(--color-border);
-  --color-border-medium:    #D7B2A5;
+  --color-border-medium:    #D4B0AE;
   --color-text-primary:     var(--color-text);
   --color-text-secondary:   var(--color-text-sub);
   --color-accent-primary:   var(--color-primary);
   --color-accent-secondary: var(--color-text-sub);
   --color-accent-gold:      var(--color-gold);
-  --color-gradient-hero:    linear-gradient(135deg, #2E1D1B 55%, #4A1F2B 100%);
+  --color-gradient-hero:    linear-gradient(135deg, #2E1D1B 55%, #3B1A28 100%);
   --color-gradient-primary: var(--gradient-primary);
   --color-gradient-accent:  var(--gradient-accent);
   --color-gradient-gold:    linear-gradient(135deg, #C3A05B, #B88D47);
@@ -76,7 +79,7 @@
   --space-4xl: 96px;
 
   /* Border radius */
-  --radius-sharp: 2px;
+  --radius-sharp: 3px;
   --radius-sm:    4px;
   --radius-md:    8px;
   --radius-lg:    12px;
@@ -117,8 +120,13 @@
     --color-text-muted:   #8D6E74;
     --color-primary:      #C3A05B;
     --color-gold:         #B88D47;
+    --color-on-primary:   var(--color-midnight);
 
-    /* ── Brand effects (dark variants) ── */
+    /* ── Additional tokens for dark mode ── */
+    --color-petal:         #2E1A20;   /* dark-mode petal: deep rose-plum tint */
+    --color-midnight-rose: #1C0F15;   /* same dark rose-plum in dark context */
+
+  /* ── Brand effects (dark variants) ── */
     --gradient-primary:   linear-gradient(160deg, #8D6E74, #4A1F2B);
     --gradient-accent:    linear-gradient(160deg, #4A1F2B, #6E3947);
     --gradient-metallic:  linear-gradient(90deg, #B88D47 30%, #E0C97A 50%, #B88D47 70%);
@@ -146,7 +154,7 @@
     --color-accent-primary:   var(--color-primary);
     --color-accent-secondary: var(--color-text-muted);
     --color-accent-gold:      var(--color-gold);
-    --color-gradient-hero:    linear-gradient(135deg, #2E1D1B 55%, #4A1F2B 100%);
+    --color-gradient-hero:    linear-gradient(135deg, #2E1D1B 55%, #3B1A28 100%);
     --color-gradient-primary: var(--gradient-primary);
     --color-gradient-accent:  var(--gradient-accent);
     --color-gradient-gold:    linear-gradient(135deg, #B88D47, #C3A05B);
@@ -166,6 +174,7 @@
   --color-bg: #2E1D1B; --color-surface: #4A1F2B; --color-border: #5A443F;
   --color-text: #F4ECE5; --color-text-sub: #D7B2A5; --color-text-muted: #8D6E74;
   --color-primary: #C3A05B; --color-gold: #B88D47;
+  --color-on-primary: var(--color-midnight);
   --gradient-primary: linear-gradient(160deg, #8D6E74, #4A1F2B);
   --color-bg-page: var(--color-bg); --color-bg-surface: var(--color-surface);
   --color-bg-card: var(--color-surface); --color-bg-elevated: #6E3947;
@@ -183,22 +192,24 @@
 }
 
 [data-theme="light"] {
-  --color-bg: #F7F2EC; --color-surface: #E8B8AA; --color-border: #E5D2C6;
-  --color-text: #2E1D1B; --color-text-sub: #B9939D; --color-text-muted: #B69E96;
-  --color-primary: #7A2F4B; --color-gold: #C3A05B;
-  --gradient-primary: linear-gradient(160deg, #D7B2A5, #7A2F4B);
+  --color-bg: #FAF6F3; --color-surface: #F0D8D0; --color-border: #E8D2CA;
+  --color-text: #2E1D1B; --color-text-sub: #A67D94; --color-text-muted: #B89FA8;
+  --color-primary: #e8b8aa; --color-gold: #C3A05B;
+  --color-on-primary: var(--color-text);
+  --color-petal: #F8EDE9; --color-midnight-rose: #1E1118;
+  --gradient-primary: linear-gradient(160deg, #F5E8E4, #e8b8aa);
   --color-bg-page: var(--color-bg); --color-bg-surface: var(--color-surface);
   --color-bg-card: #FFFFFF; --color-bg-elevated: var(--color-surface);
-  --color-border-subtle: var(--color-border); --color-border-medium: #D7B2A5;
+  --color-border-subtle: var(--color-border); --color-border-medium: #D4B0AE;
   --color-text-primary: var(--color-text); --color-text-secondary: var(--color-text-sub);
   --color-accent-primary: var(--color-primary); --color-accent-gold: var(--color-gold);
-  --hero-overlay-mobile: linear-gradient(to bottom, rgba(247,242,236,0.10) 0%, rgba(247,242,236,0.42) 38%, rgba(247,242,236,0.86) 68%, #F7F2EC 92%);
-  --hero-blend-left:     linear-gradient(to right, #F7F2EC 0%, rgba(247,242,236,0.68) 22%, rgba(247,242,236,0.22) 50%, transparent 72%);
-  --hero-blend-bottom:   linear-gradient(to top, #F7F2EC 0%, transparent 100%);
-  --hero-blend-vignette: radial-gradient(ellipse at 82% 50%, transparent 52%, rgba(247,242,236,0.42) 100%);
-  --cta-bg:           linear-gradient(160deg, #F7F2EC 0%, #EDD5C8 40%, #E5D2C6 70%, #F7F2EC 100%);
-  --cta-ghost-border: rgba(122, 47, 75, 0.35);
-  --cta-ghost-text:   #7A2F4B;
+  --hero-overlay-mobile: linear-gradient(to bottom, rgba(250,246,243,0.10) 0%, rgba(250,246,243,0.42) 38%, rgba(250,246,243,0.88) 68%, #FAF6F3 92%);
+  --hero-blend-left:     linear-gradient(to right, #FAF6F3 0%, rgba(250,246,243,0.68) 22%, rgba(250,246,243,0.22) 50%, transparent 72%);
+  --hero-blend-bottom:   linear-gradient(to top, #FAF6F3 0%, transparent 100%);
+  --hero-blend-vignette: radial-gradient(ellipse at 82% 50%, transparent 52%, rgba(250,246,243,0.42) 100%);
+  --cta-bg:           linear-gradient(160deg, #FAF6F3 0%, #F5E2DF 30%, #EDD4CE 65%, #FAF6F3 100%);
+  --cta-ghost-border: rgba(139, 74, 101, 0.30);
+  --cta-ghost-text:   #8B4A65;
 }
 
 /* ─── Base Styles ───────────────────────────────────────────── */
@@ -218,7 +229,7 @@
     color: var(--color-text);
     font-family: var(--font-body), sans-serif;
     font-size: 15px;
-    line-height: 1.75;
+    line-height: 1.8;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -226,6 +237,11 @@
     font-weight: 400;
     color: var(--color-text);
     line-height: 1.1;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
   }
 
   /* Focus ring */
@@ -348,21 +364,27 @@
 .ornament {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin: 48px auto;
+  gap: 16px;
+  margin: 56px auto;
   width: fit-content;
 }
 
 .ornament__line {
-  width: 60px;
+  width: 72px;
   height: 0.5px;
-  background: var(--color-accent-gold);
-  opacity: 0.5;
+  background: linear-gradient(to right, transparent, var(--color-accent-gold), transparent);
+  opacity: 0.55;
 }
 
 .ornament__diamond {
   color: var(--color-accent-gold);
-  font-size: 8px;
+  font-size: 7px;
+  opacity: 0.75;
+}
+
+/* Petal section tint — ultra-soft blush for in-between sections */
+.petal-section {
+  background: var(--color-petal);
 }
 
 /* ─── Page transition progress bar ────────────────────────── */
@@ -384,11 +406,12 @@
   left: 0;
   width: 100%;
   height: 1px;
-  background: var(--color-accent-gold);
+  background: var(--color-primary);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
+.nav-link:hover { color: var(--color-primary) !important; }
 .nav-link:hover::after { transform: scaleX(1); }
 
 /* ─── Hero section ─────────────────────────────────────────── */
@@ -398,33 +421,33 @@
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  background: #7A2F4B;
-  color: #F4ECE5;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
   padding: 14px 32px;
-  border-radius: 2px;
+  border-radius: var(--radius-sharp);
   text-decoration: none;
   display: inline-block;
   transition: filter 200ms cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
 }
-.hero-cta-primary:hover { filter: brightness(1.1); }
+.hero-cta-primary:hover { filter: brightness(1.08); }
 
 .hero-cta-text {
   font-family: var(--font-ui);
   font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #B9939D;
+  color: var(--color-text-sub);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  transition: letter-spacing 200ms cubic-bezier(0.16, 1, 0.3, 1), opacity 200ms;
+  transition: letter-spacing 200ms cubic-bezier(0.16, 1, 0.3, 1), color 200ms;
   white-space: nowrap;
 }
 .hero-cta-text:hover {
   letter-spacing: 0.18em;
-  opacity: 0.8;
+  color: var(--color-text);
 }
 
 /* ─── Skeleton shimmer ─────────────────────────────────────── */

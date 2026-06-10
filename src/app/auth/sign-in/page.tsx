@@ -123,7 +123,7 @@ export default function SignInPage() {
           <p role="alert" style={{
             fontFamily: 'var(--font-body)',
             fontSize: '13px',
-            color: '#e57373',
+            color: 'var(--color-error)',
             margin: 0,
           }}>
             {error}
@@ -137,8 +137,8 @@ export default function SignInPage() {
           style={{
             width: '100%',
             padding: '14px',
-            background: loading ? 'var(--color-border)' : '#7A2F4B',
-            color: '#F4ECE5',
+            background: loading ? 'var(--color-border)' : 'var(--color-primary)',
+            color: 'var(--color-on-dark)',
             border: 'none',
             borderRadius: '2px',
             fontFamily: 'var(--font-ui)',

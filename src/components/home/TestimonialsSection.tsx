@@ -70,7 +70,7 @@ export function TestimonialsSection() {
     <section
       aria-label="Client testimonials"
       style={{
-        background: '#F7F2EC',
+        background: 'var(--color-bg)',
         overflow: 'hidden',
         padding: 'clamp(72px, 10vh, 120px) 0',
         position: 'relative',
@@ -96,7 +96,7 @@ export function TestimonialsSection() {
               fontSize: '9px',
               letterSpacing: '0.22em',
               textTransform: 'uppercase',
-              color: '#7A2F4B',
+              color: 'var(--color-primary)',
               marginBottom: '16px',
             }}
           >
@@ -109,14 +109,14 @@ export function TestimonialsSection() {
               fontSize: 'clamp(28px, 3.2vw, 48px)',
               fontWeight: 300,
               lineHeight: 1.1,
-              color: '#2E1D1B',
+              color: 'var(--color-text)',
               margin: '0 auto',
               maxWidth: '520px',
               textWrap: 'balance',
             } as React.CSSProperties}
           >
             From Lagos to London,{' '}
-            <em style={{ fontStyle: 'italic', color: '#7A2F4B' }}>
+            <em style={{ fontStyle: 'italic', color: 'var(--color-primary)' }}>
               the same experience.
             </em>
           </h2>

@@ -24,7 +24,7 @@ export function CtaSection() {
           width: '600px',
           height: '600px',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(195,160,91,0.07) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, color-mix(in srgb, var(--color-gold) 7%, transparent) 0%, transparent 70%)',
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
@@ -34,7 +34,7 @@ export function CtaSection() {
           width: '400px',
           height: '400px',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(122,47,75,0.12) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, color-mix(in srgb, var(--color-primary) 12%, transparent) 0%, transparent 70%)',
           top: '30%',
           left: '20%',
         }} />
@@ -55,9 +55,9 @@ export function CtaSection() {
           gap: '16px',
           marginBottom: '40px',
         }}>
-          <div style={{ height: '0.5px', width: '60px', background: 'rgba(195,160,91,0.35)' }} />
-          <span style={{ color: '#C3A05B', fontSize: '14px', opacity: 0.7 }}>✦</span>
-          <div style={{ height: '0.5px', width: '60px', background: 'rgba(195,160,91,0.35)' }} />
+          <div style={{ height: '0.5px', width: '60px', background: 'color-mix(in srgb, var(--color-gold) 35%, transparent)' }} />
+          <span style={{ color: 'var(--color-gold)', fontSize: '14px', opacity: 0.7 }}>✦</span>
+          <div style={{ height: '0.5px', width: '60px', background: 'color-mix(in srgb, var(--color-gold) 35%, transparent)' }} />
         </div>
 
         {/* Headline */}
@@ -98,8 +98,8 @@ export function CtaSection() {
             style={{
               display: 'inline-block',
               padding: '15px 36px',
-              background: '#7A2F4B',
-              color: '#F4ECE5',
+              background: 'var(--color-primary)',
+              color: 'var(--color-on-dark)',
               borderRadius: '2px',
               fontFamily: 'var(--font-ui)',
               fontSize: '10px',

@@ -66,7 +66,7 @@ export function ProfileSection({ profile, email }: ProfileSectionProps) {
               fontSize: '9px',
               letterSpacing: '0.14em',
               textTransform: 'uppercase',
-              color: '#B9939D',
+              color: 'var(--color-text-sub)',
               marginBottom: '8px',
               margin: '0 0 8px',
             }}>
@@ -108,7 +108,7 @@ export function ProfileSection({ profile, email }: ProfileSectionProps) {
                 fontSize: '9px',
                 letterSpacing: '0.14em',
                 textTransform: 'uppercase',
-                color: '#B9939D',
+                color: 'var(--color-text-sub)',
                 margin: '0 0 8px',
               }}>
                 Full name
@@ -135,7 +135,7 @@ export function ProfileSection({ profile, email }: ProfileSectionProps) {
                 fontSize: '9px',
                 letterSpacing: '0.14em',
                 textTransform: 'uppercase' as const,
-                color: '#B9939D',
+                color: 'var(--color-text-sub)',
                 marginBottom: '8px',
               }}>
                 Phone number <span style={{ opacity: 0.6 }}>(optional)</span>
@@ -145,7 +145,7 @@ export function ProfileSection({ profile, email }: ProfileSectionProps) {
                   display: 'flex',
                   alignItems: 'center',
                   padding: '13px 12px',
-                  background: 'rgba(195,160,91,0.07)',
+                  background: 'color-mix(in srgb, var(--color-gold) 7%, transparent)',
                   border: '1px solid var(--color-border)',
                   borderRight: 'none',
                   borderRadius: '8px 0 0 8px',
@@ -185,7 +185,7 @@ export function ProfileSection({ profile, email }: ProfileSectionProps) {
                 fontSize: '9px',
                 letterSpacing: '0.14em',
                 textTransform: 'uppercase',
-                color: '#B9939D',
+                color: 'var(--color-text-sub)',
                 margin: '0 0 8px',
               }}>
                 Phone number
@@ -207,7 +207,7 @@ export function ProfileSection({ profile, email }: ProfileSectionProps) {
             <p role="alert" style={{
               fontFamily: 'var(--font-body)',
               fontSize: '13px',
-              color: '#e57373',
+              color: 'var(--color-error)',
               margin: 0,
             }}>
               {error}
@@ -218,7 +218,7 @@ export function ProfileSection({ profile, email }: ProfileSectionProps) {
             <p style={{
               fontFamily: 'var(--font-body)',
               fontSize: '13px',
-              color: '#7aab7a',
+              color: 'var(--color-success)',
               margin: 0,
             }}>
               Profile updated.
@@ -234,8 +234,8 @@ export function ProfileSection({ profile, email }: ProfileSectionProps) {
                   disabled={saving}
                   style={{
                     padding: '12px 28px',
-                    background: saving ? 'var(--color-border)' : '#7A2F4B',
-                    color: '#F4ECE5',
+                    background: saving ? 'var(--color-border)' : 'var(--color-primary)',
+                    color: 'var(--color-on-dark)',
                     border: 'none',
                     borderRadius: '2px',
                     fontFamily: 'var(--font-ui)',

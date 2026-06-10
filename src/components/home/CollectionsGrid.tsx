@@ -80,7 +80,7 @@ function AccordionCard({
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'linear-gradient(to top, color-mix(in srgb, var(--color-midnight) 92%, transparent) 0%, color-mix(in srgb, var(--color-midnight) 12%, transparent) 55%, transparent 100%)',
+            'linear-gradient(to top, color-mix(in srgb, var(--color-midnight-rose) 96%, transparent) 0%, color-mix(in srgb, var(--color-midnight-rose) 18%, transparent) 55%, transparent 100%)',
         }}
       />
 
@@ -115,7 +115,7 @@ function AccordionCard({
                 fontSize: '8px',
                 letterSpacing: '0.22em',
                 textTransform: 'uppercase',
-                color: 'var(--color-surface)',
+                color: 'color-mix(in srgb, var(--color-on-dark) 55%, transparent)',
                 marginBottom: '7px',
               }}
             >
@@ -168,7 +168,7 @@ function AccordionCard({
                 fontSize: '8px',
                 letterSpacing: '0.16em',
                 textTransform: 'uppercase',
-                color: '#C3A05B',
+                color: 'var(--color-gold)',
                 background: 'none',
                 border: 'none',
                 cursor: 'pointer',
@@ -210,7 +210,7 @@ function AccordionCard({
                 fontWeight: 800,
                 letterSpacing: '0.22em',
                 textTransform: 'uppercase',
-                color: 'rgba(195,160,91,0.8)',
+                color: 'color-mix(in srgb, var(--color-on-dark) 55%, transparent)',
                 whiteSpace: 'nowrap',
               }}
             >
@@ -225,7 +225,7 @@ function AccordionCard({
                 fontWeight: 800,
                 letterSpacing: '0.22em',
                 textTransform: 'uppercase',
-                color: 'rgba(195,160,91,0.8)',
+                color: 'color-mix(in srgb, var(--color-on-dark) 55%, transparent)',
                 whiteSpace: 'nowrap',
               }}
             >
@@ -245,7 +245,7 @@ export function CollectionsGrid() {
   return (
     <section
       aria-label="Collections"
-      style={{ background: '#2E1D1B' }}
+      style={{ background: 'var(--color-midnight-rose)' }}
       className="grid grid-cols-1 lg:grid-cols-[minmax(380px,520px)_1fr]"
     >
       {/* ── Left: title + copy + CTA ── */}
@@ -260,7 +260,7 @@ export function CollectionsGrid() {
           justifyContent: 'center',
           gap: '24px',
           padding: 'clamp(28px, 5vh, 96px) clamp(20px, 5vw, 64px)',
-          borderRight: '0.5px solid rgba(195,160,91,0.12)',
+          borderRight: '0.5px solid color-mix(in srgb, var(--color-primary) 18%, transparent)',
         }}
       >
         <h2
@@ -269,13 +269,13 @@ export function CollectionsGrid() {
             fontSize: 'clamp(28px, 3.2vw, 50px)',
             fontWeight: 300,
             lineHeight: 1.1,
-            color: '#F4ECE5',
+            color: 'var(--color-on-dark)',
             margin: 0,
             textWrap: 'balance',
           } as React.CSSProperties}
         >
           More Than A Wig.{' '}
-          <em style={{ fontStyle: 'italic', color: '#E8B8AA' }}>
+          <em style={{ fontStyle: 'italic', color: 'var(--color-primary)' }}>
             It&apos;s A Lifestyle.
           </em>
         </h2>
@@ -285,7 +285,7 @@ export function CollectionsGrid() {
             fontFamily: 'var(--font-body)',
             fontSize: '14px',
             lineHeight: 1.85,
-            color: 'rgba(244,236,229,0.5)',
+            color: 'color-mix(in srgb, var(--color-on-dark) 50%, transparent)',
             margin: 0,
           }}
         >
@@ -304,8 +304,8 @@ export function CollectionsGrid() {
             fontSize: '9px',
             letterSpacing: '0.18em',
             textTransform: 'uppercase',
-            color: '#2E1D1B',
-            background: '#C3A05B',
+            color: 'var(--color-on-primary)',
+            background: 'var(--color-primary)',
             textDecoration: 'none',
             width: 'fit-content',
           }}

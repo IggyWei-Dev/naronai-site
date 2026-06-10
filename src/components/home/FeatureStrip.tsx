@@ -32,7 +32,7 @@ export function FeatureStrip() {
   return (
     <section
       aria-label="Features"
-      style={{ background: 'var(--color-bg)', borderTop: '1px solid rgba(195, 160, 91, 0.2)' }}
+      style={{ background: 'var(--color-bg)', borderTop: '1px solid color-mix(in srgb, var(--color-gold) 20%, transparent)' }}
       className="py-12 md:py-16"
     >
       <div className="max-w-[1440px] mx-auto px-4 md:px-6 lg:px-0">
@@ -52,7 +52,7 @@ export function FeatureStrip() {
                   borderRadius={4}
                   backgroundColor="var(--color-surface)"
                   glowColor="38 45 55"
-                  colors={['#7A2F4B', '#C3A05B', '#E8B8AA']}
+                  colors={['var(--color-primary)', 'var(--color-gold)', 'var(--color-surface)']}
                   glowIntensity={0.85}
                   edgeSensitivity={22}
                   glowRadius={24}
@@ -66,29 +66,40 @@ export function FeatureStrip() {
                       flexDirection: 'column',
                       alignItems: 'center',
                       textAlign: 'center',
-                      gap: '10px',
-                      padding: '28px 20px',
+                      gap: '12px',
+                      padding: '32px 24px',
                     }}
                   >
                     <Icon
-                      size={80}
+                      size={36}
                       strokeWidth={1.0}
-                      style={{ color: i % 2 === 0 ? 'var(--color-gold)' : 'var(--color-primary)' }}
+                      style={{ color: i % 2 === 0 ? 'var(--color-gold)' : 'var(--color-primary)', marginBottom: '4px' }}
                       aria-hidden="true"
                     />
                     <span
                       style={{
-                        fontFamily: 'var(--font-ui)',
-                        fontSize: '10px',
-                        letterSpacing: '0.16em',
-                        textTransform: 'uppercase',
+                        fontFamily: 'var(--font-display)',
+                        fontSize: '20px',
+                        fontWeight: 300,
+                        fontStyle: 'italic',
+                        letterSpacing: '0.01em',
                         color: 'var(--color-text)',
-                        fontWeight: 600,
+                        lineHeight: 1.2,
                       }}
                     >
                       {f.title}
                     </span>
-                   
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-body)',
+                        fontSize: '12px',
+                        lineHeight: 1.7,
+                        color: 'var(--color-text-sub)',
+                        maxWidth: '180px',
+                      }}
+                    >
+                      {f.desc}
+                    </span>
                   </div>
                 </BorderGlow>
               </motion.div>

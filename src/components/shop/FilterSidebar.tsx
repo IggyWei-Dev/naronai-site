@@ -150,7 +150,7 @@ export function FilterSidebar() {
                   borderRadius: '20px',
                   border: `0.5px solid ${active ? 'var(--color-accent-primary)' : 'var(--color-border)'}`,
                   background: active ? 'var(--color-accent-primary)' : 'transparent',
-                  color: active ? '#F4ECE5' : 'var(--color-text-muted)',
+                  color: active ? 'var(--color-on-dark)' : 'var(--color-text-muted)',
                   cursor: 'pointer',
                   transition: 'all 150ms',
                 }}
@@ -251,7 +251,7 @@ function Checkbox({
       }}>
         {checked && (
           <svg width="8" height="6" viewBox="0 0 8 6" fill="none" aria-hidden="true">
-            <path d="M1 3L3 5L7 1" stroke="#F4ECE5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M1 3L3 5L7 1" stroke="var(--color-on-dark)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         )}
       </span>
@@ -296,7 +296,7 @@ function Chip({
         borderRadius: '20px',
         border: `0.5px solid ${active ? 'var(--color-accent-primary)' : 'var(--color-border)'}`,
         background: active ? 'var(--color-accent-primary)' : 'transparent',
-        color: active ? '#F4ECE5' : 'var(--color-text-muted)',
+        color: active ? 'var(--color-on-dark)' : 'var(--color-text-muted)',
         cursor: 'pointer',
         transition: 'all 150ms',
       }}

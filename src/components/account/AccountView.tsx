@@ -63,7 +63,7 @@ export function AccountView({ user, profile, orders, wishlist }: AccountViewProp
         style={{
           width: '256px',
           flexShrink: 0,
-          background: '#2E1D1B',
+          background: 'var(--color-midnight)',
           flexDirection: 'column',
           justifyContent: 'space-between',
           padding: 'clamp(40px, 6vh, 72px) 32px',
@@ -82,15 +82,15 @@ export function AccountView({ user, profile, orders, wishlist }: AccountViewProp
               width: '48px',
               height: '48px',
               borderRadius: '50%',
-              background: 'rgba(195,160,91,0.15)',
-              border: '0.5px solid rgba(195,160,91,0.3)',
+              background: 'color-mix(in srgb, var(--color-gold) 15%, transparent)',
+              border: '0.5px solid color-mix(in srgb, var(--color-gold) 30%, transparent)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               fontFamily: 'var(--font-ui)',
               fontSize: '13px',
               letterSpacing: '0.08em',
-              color: '#C3A05B',
+              color: 'var(--color-gold)',
               marginBottom: '16px',
             }}>
               {initials}
@@ -102,7 +102,7 @@ export function AccountView({ user, profile, orders, wishlist }: AccountViewProp
               fontSize: 'clamp(18px, 2vw, 22px)',
               fontWeight: 300,
               fontStyle: 'italic',
-              color: '#F7F2EC',
+              color: 'var(--color-bg)',
               margin: '0 0 4px',
               lineHeight: 1.2,
             }}>
@@ -111,7 +111,7 @@ export function AccountView({ user, profile, orders, wishlist }: AccountViewProp
             <p style={{
               fontFamily: 'var(--font-body)',
               fontSize: '12px',
-              color: 'rgba(244,236,229,0.4)',
+              color: 'color-mix(in srgb, var(--color-on-dark) 40%, transparent)',
               margin: 0,
             }}>
               {user.email}
@@ -129,7 +129,7 @@ export function AccountView({ user, profile, orders, wishlist }: AccountViewProp
                   alignItems: 'center',
                   gap: '10px',
                   padding: '10px 12px',
-                  background: section === item.id ? 'rgba(195,160,91,0.1)' : 'none',
+                  background: section === item.id ? 'color-mix(in srgb, var(--color-gold) 10%, transparent)' : 'none',
                   border: 'none',
                   borderRadius: '4px',
                   cursor: 'pointer',
@@ -137,7 +137,7 @@ export function AccountView({ user, profile, orders, wishlist }: AccountViewProp
                   fontSize: '9px',
                   letterSpacing: '0.16em',
                   textTransform: 'uppercase',
-                  color: section === item.id ? '#C3A05B' : 'rgba(244,236,229,0.5)',
+                  color: section === item.id ? 'var(--color-gold)' : 'color-mix(in srgb, var(--color-on-dark) 50%, transparent)',
                   textAlign: 'left',
                   width: '100%',
                   transition: 'background 180ms ease, color 180ms ease',
@@ -166,7 +166,7 @@ export function AccountView({ user, profile, orders, wishlist }: AccountViewProp
             fontSize: '9px',
             letterSpacing: '0.16em',
             textTransform: 'uppercase',
-            color: 'rgba(244,236,229,0.3)',
+            color: 'color-mix(in srgb, var(--color-on-dark) 30%, transparent)',
             width: '100%',
             textAlign: 'left',
             transition: 'color 180ms ease',
@@ -186,8 +186,8 @@ export function AccountView({ user, profile, orders, wishlist }: AccountViewProp
           left: 0,
           right: 0,
           zIndex: 10,
-          background: '#2E1D1B',
-          borderBottom: '0.5px solid rgba(195,160,91,0.12)',
+          background: 'var(--color-midnight)',
+          borderBottom: '0.5px solid color-mix(in srgb, var(--color-gold) 12%, transparent)',
           padding: '0 20px',
           gap: '0',
         }}
@@ -205,13 +205,13 @@ export function AccountView({ user, profile, orders, wishlist }: AccountViewProp
               padding: '14px 0',
               background: 'none',
               border: 'none',
-              borderBottom: section === item.id ? '1.5px solid #C3A05B' : '1.5px solid transparent',
+              borderBottom: section === item.id ? '1.5px solid var(--color-gold)' : '1.5px solid transparent',
               cursor: 'pointer',
               fontFamily: 'var(--font-ui)',
               fontSize: '8px',
               letterSpacing: '0.14em',
               textTransform: 'uppercase',
-              color: section === item.id ? '#C3A05B' : 'rgba(244,236,229,0.4)',
+              color: section === item.id ? 'var(--color-gold)' : 'color-mix(in srgb, var(--color-on-dark) 40%, transparent)',
               transition: 'color 180ms ease, border-color 180ms ease',
             }}
           >
@@ -231,7 +231,7 @@ export function AccountView({ user, profile, orders, wishlist }: AccountViewProp
             border: 'none',
             borderBottom: '1.5px solid transparent',
             cursor: 'pointer',
-            color: 'rgba(244,236,229,0.3)',
+            color: 'color-mix(in srgb, var(--color-on-dark) 30%, transparent)',
           }}
           aria-label="Sign out"
         >
@@ -253,7 +253,7 @@ export function AccountView({ user, profile, orders, wishlist }: AccountViewProp
           <div style={{
             width: '32px',
             height: '0.5px',
-            background: 'rgba(195,160,91,0.3)',
+            background: 'color-mix(in srgb, var(--color-gold) 30%, transparent)',
             marginBottom: '16px',
           }} />
           <h1 style={{

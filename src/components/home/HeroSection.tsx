@@ -1,20 +1,40 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useEffect, useRef } from 'react'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import Link from 'next/link'
-const HERO_IMG  = '/assets/images/hero/Gemini_Generated_Image_n11mf5n11mf5n11m.png'
 
-/* Direct per-element animation — avoids variant propagation issues in FM v11 + Next.js SSR */
-const fade = (i: number) => ({
-  initial:    { opacity: 0, y: 26 },
-  animate:    { opacity: 1, y: 0 },
-  transition: { duration: 0.82, delay: 0.2 + i * 0.12, ease: [0.16, 1, 0.3, 1] as const },
-})
+const SLIDES = [
+  {
+    image: '/assets/images/hero/hero-slide-1.png',
+    eyebrow: 'New Collection',
+    headline: ['Luxury Hair.', 'Limitless You.'],
+    sub: 'Premium human hair wigs.\nLuxury experiences. Lasting impact.',
+  },
+  {
+    image: '/assets/images/hero/hero-slide-2.png',
+    eyebrow: 'Bespoke',
+    headline: ['Bespoke.', 'Bold. Unapologetic.'],
+    sub: 'Made exactly for you. Every length,\ntexture, and style — crafted to order.',
+  },
+  {
+    image: '/assets/images/hero/hero-slide-3.png',
+    eyebrow: 'Signature',
+    headline: ['Leave an', 'Impression.'],
+    sub: 'The signature of a woman who\nknows what she deserves.',
+  },
+] as const
+
+const INTERVAL = 6000
 
 export function HeroSection() {
+  const [current, setCurrent] = useState(0)
   const [scrollY, setScrollY] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const reduced = useReducedMotion()
+  const timerRef = useRef<ReturnType<typeof setTimeout>>()
 
+  // Parallax scroll (desktop only)
   useEffect(() => {
     if (!window.matchMedia('(min-width: 768px)').matches) return
     let raf = 0
@@ -26,9 +46,27 @@ export function HeroSection() {
     return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(raf) }
   }, [])
 
+  // Auto-advance — resets naturally whenever current, paused, or reduced changes
+  useEffect(() => {
+    if (reduced || paused) return
+    timerRef.current = setTimeout(() => {
+      setCurrent(prev => (prev + 1) % SLIDES.length)
+    }, INTERVAL)
+    return () => clearTimeout(timerRef.current)
+  }, [current, paused, reduced])
+
+  const goTo = (i: number) => {
+    clearTimeout(timerRef.current)
+    setCurrent(i)
+  }
+
+  const slide = SLIDES[current]
+
   return (
     <section
       aria-label="Hero"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
       style={{
         height: '100svh',
         minHeight: '600px',
@@ -40,74 +78,63 @@ export function HeroSection() {
       }}
     >
 
-      {/* ── Mobile: full-bleed background image ─────────────────── */}
-      <div
-        className="md:hidden"
-        style={{ position: 'absolute', inset: 0 }}
-      >
-        <img
-          src={HERO_IMG}
-          alt=""
-          aria-hidden="true"
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            objectPosition: '68% 15%',
-            display: 'block',
-          }}
-        />
+      {/* ── Mobile: full-bleed images (crossfade) ── */}
+      <div className="md:hidden" style={{ position: 'absolute', inset: 0 }}>
+        {SLIDES.map((s, i) => (
+          <motion.img
+            key={i}
+            src={s.image}
+            alt=""
+            aria-hidden="true"
+            style={{
+              position: 'absolute', inset: 0,
+              width: '100%', height: '100%',
+              objectFit: 'cover', objectPosition: '68% 15%',
+              display: 'block',
+            }}
+            animate={{ opacity: i === current ? 1 : 0 }}
+            transition={{ duration: 1.2, ease: 'easeInOut' }}
+          />
+        ))}
         <div style={{
-          position: 'absolute',
-          inset: 0,
+          position: 'absolute', inset: 0, zIndex: 1,
           background: 'var(--hero-overlay-mobile)',
         }} />
       </div>
 
-      {/* ── Desktop: right image panel (60% wide) ──────────────────── */}
+      {/* ── Desktop: right image panel (60%) ── */}
       <div
         className="hidden md:block"
-        style={{
-          position: 'absolute',
-          right: 0, top: 0, bottom: 0,
-          width: '60%',
-          overflow: 'hidden',
-        }}
+        style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '60%', overflow: 'hidden' }}
       >
-        {/* Left-edge blend */}
-        <div style={{
-          position: 'absolute', inset: 0, zIndex: 2, pointerEvents: 'none',
-          background: 'var(--hero-blend-left)',
-        }} />
-        {/* Bottom fade */}
-        <div style={{
-          position: 'absolute', bottom: 0, left: 0, right: 0, height: '24%', zIndex: 2, pointerEvents: 'none',
-          background: 'var(--hero-blend-bottom)',
-        }} />
-        {/* Right vignette */}
-        <div style={{
-          position: 'absolute', inset: 0, zIndex: 2, pointerEvents: 'none',
-          background: 'var(--hero-blend-vignette)',
-        }} />
+        {/* Theme-aware blend overlays */}
+        <div style={{ position: 'absolute', inset: 0, zIndex: 2, pointerEvents: 'none', background: 'var(--hero-blend-left)' }} />
+        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '24%', zIndex: 2, pointerEvents: 'none', background: 'var(--hero-blend-bottom)' }} />
+        <div style={{ position: 'absolute', inset: 0, zIndex: 2, pointerEvents: 'none', background: 'var(--hero-blend-vignette)' }} />
 
-        {/* Parallax image */}
-        <div style={{
-          width: '100%',
-          height: '125%',
-          marginTop: '-4%',
-          transform: `translateY(${scrollY * 0.33}px)`,
-          willChange: 'transform',
-        }}>
-          <img
-            src={HERO_IMG}
-            alt="Naronai luxury hair model"
-            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
-          />
-        </div>
-
+        {/* Stacked images — crossfade on current change */}
+        {SLIDES.map((s, i) => (
+          <motion.div
+            key={i}
+            style={{
+              position: 'absolute', inset: 0,
+              width: '100%', height: '125%', marginTop: '-4%',
+              transform: `translateY(${scrollY * 0.33}px)`,
+              willChange: 'transform',
+            }}
+            animate={{ opacity: i === current ? 1 : 0 }}
+            transition={{ duration: 1.2, ease: 'easeInOut' }}
+          >
+            <img
+              src={s.image}
+              alt={i === current ? 'Naronai luxury hair model' : ''}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
+            />
+          </motion.div>
+        ))}
       </div>
 
-      {/* ── Left panel ─────────────────────────────────────────────── */}
+      {/* ── Left text panel ── */}
       <div
         className="pb-[100px] md:pb-[clamp(80px,10vh,120px)]"
         style={{
@@ -122,60 +149,110 @@ export function HeroSection() {
           paddingRight: '24px',
         }}
       >
-        {/* Text content */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '22px', maxWidth: '510px' }}>
 
-          {/* Headline */}
-          <motion.h1 {...fade(0)} style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(46px, 6.2vw, 80px)',
-            fontWeight: 300,
-            lineHeight: 1.0,
-            letterSpacing: '-0.01em',
-            color: 'var(--color-text)',
-            margin: 0,
-          }}>
-            Luxury Hair.<br />
-            <em className="gold-shimmer" style={{ fontStyle: 'italic', fontWeight: 300 }}>
-              Limitless You.
-            </em>
-          </motion.h1>
+          {/* Transition B — text rises out upward, new text rises in from below */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current}
+              style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}
+              initial={reduced ? { opacity: 0 } : { opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduced ? { opacity: 0 } : { opacity: 0, y: -22 }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {/* Eyebrow */}
+              <span style={{
+                fontFamily: 'var(--font-ui)',
+                fontSize: '10px',
+                letterSpacing: '0.2em',
+                textTransform: 'uppercase',
+                color: 'var(--color-gold)',
+                opacity: 0.8,
+              }}>
+                {slide.eyebrow}
+              </span>
 
-          {/* Sub-copy */}
-          <motion.p {...fade(1)} style={{
-            fontFamily: 'var(--font-body)',
-            fontSize: '15px',
-            color: 'var(--color-text-sub)',
-            lineHeight: 1.75,
-            margin: 0,
-            maxWidth: '270px',
-          }}>
-            Premium human hair wigs.<br />
-            Luxury experiences.<br />
-            Lasting impact.
-          </motion.p>
+              {/* Headline */}
+              <h1 style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(46px, 6.2vw, 80px)',
+                fontWeight: 300,
+                lineHeight: 1.0,
+                letterSpacing: '-0.01em',
+                color: 'var(--color-text)',
+                margin: 0,
+              }}>
+                {slide.headline[0]}<br />
+                <em className="gold-shimmer" style={{ fontStyle: 'italic', fontWeight: 300 }}>
+                  {slide.headline[1]}
+                </em>
+              </h1>
 
-          {/* CTAs */}
-          <motion.div {...fade(2)} style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '28px',
-            flexWrap: 'wrap',
-            paddingTop: '6px',
-          }}>
-            <Link href="/shop" className="hero-cta-primary">
-              Shop Collections
-            </Link>
-            <Link href="/consultation" className="hero-cta-text">
-              Book a Consultation <span aria-hidden="true">→</span>
-            </Link>
-          </motion.div>
+              {/* Sub-copy */}
+              <p style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: '15px',
+                color: 'var(--color-text-sub)',
+                lineHeight: 1.75,
+                margin: 0,
+                maxWidth: '270px',
+                whiteSpace: 'pre-line',
+              }}>
+                {slide.sub}
+              </p>
+
+              {/* CTAs */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '28px',
+                flexWrap: 'wrap',
+                paddingTop: '6px',
+              }}>
+                <Link href="/shop" className="hero-cta-primary">
+                  Shop Collections
+                </Link>
+                <Link href="/consultation" className="hero-cta-text">
+                  Book a Consultation <span aria-hidden="true">→</span>
+                </Link>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Progress dots */}
+          <div
+            style={{ display: 'flex', gap: '8px' }}
+            role="tablist"
+            aria-label="Carousel navigation"
+          >
+            {SLIDES.map((_, i) => (
+              <button
+                key={i}
+                role="tab"
+                aria-selected={i === current}
+                aria-label={`Slide ${i + 1}`}
+                onClick={() => goTo(i)}
+                style={{
+                  width: i === current ? '32px' : '16px',
+                  height: '2px',
+                  background: i === current
+                    ? 'var(--color-gold)'
+                    : 'color-mix(in srgb, var(--color-text-muted) 40%, transparent)',
+                  border: 'none',
+                  borderRadius: '2px',
+                  padding: 0,
+                  cursor: 'pointer',
+                  transition: 'width 0.3s ease, background 0.3s ease',
+                }}
+              />
+            ))}
+          </div>
+
         </div>
-
-        {/* closes "Text content at the bottom" div */}
       </div>
 
-      {/* ── Scroll indicator ───────────────────────────────────────── */}
+      {/* ── Scroll indicator ── */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
