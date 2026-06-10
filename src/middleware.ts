@@ -25,8 +25,16 @@ export async function middleware(request: NextRequest) {
     }
   )
 
-  // Refreshes the session token on every request — do not remove.
-  await supabase.auth.getUser()
+  // Refresh session token — do not remove.
+  const { data: { user } } = await supabase.auth.getUser()
+
+  // Block unauthenticated access to admin routes.
+  if (request.nextUrl.pathname.startsWith('/admin') && !user) {
+    const url = request.nextUrl.clone()
+    url.pathname = '/auth/sign-in'
+    url.searchParams.set('redirect', request.nextUrl.pathname)
+    return NextResponse.redirect(url)
+  }
 
   return supabaseResponse
 }
