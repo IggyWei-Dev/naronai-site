@@ -281,7 +281,7 @@ export function StaggeredMenu({
   }, [closeOnClickAway, open, closeMenu])
 
   const prelayerColors = (() => {
-    const raw = colors.length ? colors.slice(0, 4) : ['var(--color-midnight)', '#3A1C28']
+    const raw = colors.length ? colors.slice(0, 4) : ['var(--color-midnight)', 'var(--color-midnight)']
     const arr = [...raw]
     if (arr.length >= 3) arr.splice(Math.floor(arr.length / 2), 1)
     return arr
