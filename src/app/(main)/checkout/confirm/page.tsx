@@ -1,13 +1,13 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { useSearchParams }      from 'next/navigation'
-import Link                     from 'next/link'
-import { CheckCircle, XCircle } from 'lucide-react'
-import { Button }               from '@/components/ui/button'
-import { useCartStore }         from '@/lib/store/cartStore'
+import { useEffect, useState, Suspense } from 'react'
+import { useSearchParams }               from 'next/navigation'
+import Link                              from 'next/link'
+import { CheckCircle, XCircle }          from 'lucide-react'
+import { Button }                        from '@/components/ui/button'
+import { useCartStore }                  from '@/lib/store/cartStore'
 
-export default function CheckoutConfirmPage() {
+function CheckoutConfirmContent() {
   const searchParams = useSearchParams()
   const reference    = searchParams.get('reference') ?? searchParams.get('ref')
   const clearCart    = useCartStore((s) => s.clearCart)
@@ -84,5 +84,13 @@ export default function CheckoutConfirmPage() {
         <Link href="/cart" style={{ textDecoration: 'none', color: 'inherit' }}>Return to Cart</Link>
       </Button>
     </div>
+  )
+}
+
+export default function CheckoutConfirmPage() {
+  return (
+    <Suspense>
+      <CheckoutConfirmContent />
+    </Suspense>
   )
 }
